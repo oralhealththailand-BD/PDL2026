@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>แสดงความประสงค์เข้ารับการอบรม — ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1c33; --navy-2:#12305c; --blue:#1c4fd8; --blue-dk:#1740ae; --blue-lt:#4a7cf0;
+  --tint:#eef3fd; --tint-2:#dde7fb;
+  --silver:#e6eaf1; --silver-2:#ccd4e0; --steel:#f4f6fa;
+  --line:#e0e5ee; --line-2:#cfd7e4;
+  --ink:#0d1b2e; --muted:#5a6779;
+  --info-bg:#f3f7fe; --info-line:#1c4fd8;
+  --danger:#b42318; --danger-bg:#fdf1f0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'IBM Plex Sans Thai','Segoe UI',Tahoma,sans-serif;
+  background:var(--steel); color:var(--ink);
+  line-height:1.75; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---- masthead: navy field, silver hairline, tight display type ---- */
+.masthead{
+  background:linear-gradient(158deg,var(--navy) 0%,#102a52 58%,var(--navy-2) 100%);
+  color:#fff; padding:2rem 1.25rem 1.8rem; position:relative; overflow:hidden;
+}
+.masthead::before{
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 46px);
+  pointer-events:none;
+}
+.masthead::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--silver-2) 22%,#fff 50%,var(--silver-2) 78%,transparent);
+  opacity:.75;
+}
+.masthead .in{max-width:660px;margin:0 auto;position:relative}
+.masthead .org{font-size:.78rem;color:#9fb6dd;margin-bottom:.6rem;font-weight:500}
+.masthead h1{font-size:1.45rem;font-weight:600;line-height:1.35;letter-spacing:-.015em}
+@media(min-width:560px){.masthead h1{font-size:1.75rem}}
+.masthead .sub{
+  font-size:.88rem;color:#b9c9e4;margin-top:.7rem;padding-top:.7rem;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+
+/* ---- progress ---- */
+.bar{max-width:660px;margin:0 auto;padding:0 1.25rem}
+.track{display:flex;gap:5px;margin:1.3rem 0 .4rem}
+.track i{flex:1;height:3px;border-radius:2px;background:var(--silver-2);transition:background .3s}
+.track i.on{background:var(--blue)}
+.track-lbl{font-size:.82rem;color:var(--muted);margin-bottom:1.1rem;font-weight:500}
+
+main{max-width:660px;margin:0 auto;padding:0 1.25rem 4rem}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:1.6rem 1.35rem;box-shadow:0 1px 2px rgba(13,27,46,.04),0 12px 32px -18px rgba(13,27,46,.22);
+}
+@media(min-width:560px){.card{padding:2.1rem 2rem}}
+
+h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:.94rem;margin-bottom:1.5rem}
+p+p{margin-top:.85rem}
+
+.field{margin-bottom:1.45rem}
+.field:last-of-type{margin-bottom:0}
+label.q{display:block;font-weight:600;margin-bottom:.15rem}
+.hint{font-size:.85rem;color:var(--muted);margin-bottom:.6rem}
+.req{color:var(--danger);font-weight:400}
+
+input[type=text],input[type=tel],input[type=email],select{
+  width:100%;font:inherit;font-size:1rem;color:var(--ink);
+  background:#fff;border:1.5px solid var(--line-2);border-radius:10px;
+  padding:.72rem .9rem;transition:border-color .15s,box-shadow .15s;
+}
+input::placeholder{color:#9aa5b5}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,79,216,.14)}
+select{appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%235a6779' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .95rem center;background-size:12px;padding-right:2.5rem}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media(max-width:400px){.two{grid-template-columns:1fr}}
+.opts{display:flex;flex-direction:column;gap:.55rem}
+.opt{
+  display:flex;align-items:flex-start;gap:.75rem;
+  border:1.5px solid var(--line-2);border-radius:11px;padding:.75rem .9rem;
+  cursor:pointer;background:#fff;transition:border-color .15s,background .15s;
+}
+.opt:hover{border-color:var(--blue-lt);background:#fafbfe}
+.opt input{margin:.4rem 0 0;accent-color:var(--blue);width:18px;height:18px;flex:none}
+.opt span{font-size:.97rem}
+.opt small{display:block;color:var(--muted);font-size:.85rem;line-height:1.5;margin-top:.1rem}
+.opt.sel{border-color:var(--blue);background:var(--tint);box-shadow:inset 0 0 0 1px var(--blue)}
+.opt:focus-within{box-shadow:0 0 0 3px rgba(28,79,216,.14)}
+
+.runs{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;margin:1rem 0 1.2rem;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.runs th,.runs td{padding:.6rem .7rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.runs tr:last-child td{border-bottom:none}
+.runs th{background:var(--silver);font-weight:600;color:var(--navy);font-size:.85rem}
+.runs td.wait{color:#8e99a9}
+
+.note{
+  border-left:3px solid var(--info-line);background:var(--info-bg);
+  padding:.9rem 1.05rem;border-radius:0 10px 10px 0;font-size:.92rem;margin:1.2rem 0;
+}
+.note b{display:block;margin-bottom:.2rem;color:var(--navy)}
+
+.assign{
+  background:linear-gradient(180deg,#fff,var(--tint));
+  border:1px solid var(--tint-2);border-radius:12px;padding:1rem 1.1rem;font-size:.93rem;margin-top:1.1rem;
+}
+.assign dt{color:var(--muted);font-size:.82rem;font-weight:500}
+.assign dd{font-weight:600;margin-bottom:.55rem;color:var(--navy)}
+.assign dd:last-child{margin-bottom:0}
+
+.err{background:var(--danger-bg);color:var(--danger);border:1px solid #f3cfcb;border-radius:10px;
+  padding:.7rem .9rem;font-size:.92rem;margin-bottom:1.2rem;display:none}
+.err.show{display:block}
+
+.nav{display:flex;gap:.75rem;margin-top:1.9rem}
+button{font:inherit;font-weight:600;border-radius:11px;cursor:pointer;
+  padding:.82rem 1.4rem;border:1.5px solid transparent;transition:background .15s,border-color .15s,box-shadow .15s}
+button:focus-visible{outline:3px solid rgba(28,79,216,.4);outline-offset:2px}
+.go{background:var(--blue);color:#fff;flex:1;box-shadow:0 1px 2px rgba(23,64,174,.3)}
+.go:hover{background:var(--blue-dk)}
+.go:disabled{background:var(--silver-2);color:#fff;box-shadow:none;cursor:wait}
+.back{background:#fff;color:var(--muted);border-color:var(--line-2)}
+.back:hover{border-color:var(--blue-lt);color:var(--navy)}
+
+dl.sum{font-size:.93rem;border-top:1px solid var(--line);margin-top:.5rem}
+dl.sum div{display:flex;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--line)}
+dl.sum dt{color:var(--muted);flex:0 0 8.5rem;font-weight:500}
+dl.sum dd{font-weight:500;color:var(--navy)}
+
+.done-code{font-size:1.75rem;font-weight:600;color:var(--blue);letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.tick{width:54px;height:54px;border-radius:50%;background:var(--tint);border:1px solid var(--tint-2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.tick svg{width:26px;height:26px}
+
+footer{max-width:660px;margin:0 auto;padding:0 1.25rem 3rem;color:var(--muted);font-size:.85rem}
+a{color:var(--blue)}
+.hide{display:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="in">
+    <div class="org">สำนักทันตสาธารณสุข กรมอนามัย กระทรวงสาธารณสุข</div>
+    <h1>แสดงความประสงค์เข้ารับการอบรม<br>ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</h1>
+    <div class="sub">ปิดรับ 2 ตุลาคม 2569 · ประกาศรายชื่อ 9 ตุลาคม 2569</div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="track" id="track" aria-hidden="true"></div>
+  <div class="track-lbl" id="tracklbl"></div>
+</div>
+
+<main>
+<div class="card">
+  <div class="err" id="err" role="alert"></div>
+
+  <!-- 0 ---------------------------------------------------------- intro -->
+  <section id="s-intro">
+    <h2>ก่อนเริ่ม</h2>
+    <p class="lede">การกรอกแบบฟอร์มนี้เป็นการแสดงความประสงค์ ยังไม่ใช่การยืนยันสิทธิ์เข้าอบรม</p>
+    <p>การอบรมจัดขึ้น 3 รุ่น รุ่นละ 80 คน แบ่งเป็นสังกัดกระทรวงสาธารณสุข 40 คน และองค์การบริหารส่วนจังหวัด 40 คน ท่านจะถูกจัดเข้ารุ่นตามเขตสุขภาพของจังหวัดที่ปฏิบัติงาน</p>
+
+    <table class="runs">
+      <thead><tr><th>รุ่น</th><th>เขตสุขภาพ</th><th>วันอบรม</th><th>สถานที่</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>7, 8, 9, 10</td><td>18–20 พ.ย. 2569</td><td>นครราชสีมา</td></tr>
+        <tr><td>2</td><td>4, 5, 6, 11, 12</td><td>25–27 พ.ย. 2569</td><td>กรุงเทพฯ หรือปริมณฑล</td></tr>
+        <tr><td>3</td><td>1, 2, 3</td><td>23–25 ธ.ค. 2569</td><td>นครสวรรค์</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <b>เกณฑ์การจัดสรรเมื่อมีผู้สมัครเกินโควตา</b>
+      1. กระจายให้ครบทุกจังหวัดในเขต จังหวัดละอย่างน้อย 1 คน<br>
+      2. คงสัดส่วนสังกัด สธ ต่อ อบจ. เท่ากับ 50 ต่อ 50 ของโควตาที่เขตได้รับ<br>
+      3. ส่วนที่เหลือพิจารณาตามลำดับเวลาที่แสดงความประสงค์
+    </div>
+
+    <p>ใช้เวลากรอกประมาณ 4 นาที</p>
+    <div class="nav"><button class="go" onclick="go('screen')">เริ่มกรอกข้อมูล</button></div>
+  </section>
+
+  <!-- 1 -------------------------------------------------------- screening -->
+  <section id="s-screen" class="hide">
+    <h2>คุณสมบัติผู้เข้ารับการอบรม</h2>
+    <p class="lede">โปรดตอบตามความเป็นจริง เพื่อให้การจัดสรรที่นั่งเป็นไปตามกลุ่มเป้าหมายของหลักสูตร</p>
+
+    <div class="field">
+      <label class="q">ตำแหน่งปัจจุบัน <span class="req">*</span></label>
+      <div class="hint">ทันตาภิบาลที่ปรับวุฒิแล้ว ให้เลือกตามชื่อตำแหน่งในทะเบียนประวัติปัจจุบัน</div>
+      <div class="opts" data-name="position_type">
+        <label class="opt"><input type="radio" name="position_type" value="นักวิชาการสาธารณสุข" onchange="fillLevels()"><span>นักวิชาการสาธารณสุข</span></label>
+        <label class="opt"><input type="radio" name="position_type" value="เจ้าพนักงานทันตสาธารณสุข" onchange="fillLevels()"><span>เจ้าพนักงานทันตสาธารณสุข</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">หน่วยบริการที่ปฏิบัติงาน <span class="req">*</span></label>
+      <div class="opts" data-name="unit">
+        <label class="opt"><input type="radio" name="unit" value="รพ.สต."><span>โรงพยาบาลส่งเสริมสุขภาพตำบล</span></label>
+        <label class="opt"><input type="radio" name="unit" value="รพ.ชุมชน"><span>โรงพยาบาลชุมชน</span></label>
+        <label class="opt"><input type="radio" name="unit" value="อื่น" data-fail="1"><span>หน่วยบริการอื่น</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">ปัจจุบันรับผิดชอบงานทันตกรรมปฐมภูมิหรือไม่ <span class="req">*</span></label>
+      <div class="opts" data-name="primary_care">
+        <label class="opt"><input type="radio" name="primary_care" value="รับผิดชอบ"><span>รับผิดชอบ</span></label>
+        <label class="opt"><input type="radio" name="primary_care" value="ไม่" data-fail="1"><span>ไม่ได้รับผิดชอบ</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">ประสบการณ์ปฏิบัติงานในหน่วยบริการปฐมภูมิ <span class="req">*</span></label>
+      <div class="opts" data-name="experience">
+        <label class="opt"><input type="radio" name="experience" value="น้อยกว่า 1 ปี" data-fail="1"><span>น้อยกว่า 1 ปี</span></label>
+        <label class="opt"><input type="radio" name="experience" value="1-3 ปี"><span>1–3 ปี</span></label>
+        <label class="opt"><input type="radio" name="experience" value="4-10 ปี"><span>4–10 ปี</span></label>
+        <label class="opt"><input type="radio" name="experience" value="มากกว่า 10 ปี"><span>มากกว่า 10 ปี</span></label>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="back" onclick="go('intro')">ย้อนกลับ</button>
+      <button class="go" onclick="okScreen()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- fail ------------------------------------------------------------- -->
+  <section id="s-fail" class="hide">
+    <h2>คุณสมบัติยังไม่ครบตามเกณฑ์</h2>
+    <p class="lede">ขอบคุณสำหรับความสนใจ</p>
+    <p>การอบรมรุ่นนี้กำหนดคุณสมบัติเฉพาะผู้ที่ปฏิบัติงานในหน่วยบริการปฐมภูมิ รับผิดชอบงานทันตกรรมปฐมภูมิ และมีประสบการณ์ไม่น้อยกว่า 1 ปี</p>
+    <p>หากสำนักทันตสาธารณสุขเปิดช่องทางการอบรมรูปแบบอื่นเพิ่มเติม จะประชาสัมพันธ์ผ่านเขตสุขภาพและสำนักงานสาธารณสุขจังหวัดต่อไป</p>
+    <p>หากท่านคิดว่าตอบคำถามผิด สามารถย้อนกลับไปแก้ไขได้</p>
+    <div class="nav"><button class="back" onclick="go('screen')">แก้ไขคำตอบ</button></div>
+  </section>
+
+  <!-- 2 ------------------------------------------------------------ area -->
+  <section id="s-area" class="hide">
+    <h2>สังกัดและพื้นที่ปฏิบัติงาน</h2>
+    <p class="lede">ระบบจะจัดรุ่นให้อัตโนมัติจากจังหวัดที่ท่านเลือก</p>
+
+    <div class="field">
+      <label class="q">สังกัด <span class="req">*</span></label>
+      <div class="opts" data-name="affiliation">
+        <label class="opt"><input type="radio" name="affiliation" value="กระทรวงสาธารณสุข (สสจ.)" onchange="showAssign()"><span>กระทรวงสาธารณสุข (สสจ.)<small>ผู้จัดรับผิดชอบค่าที่พัก</small></span></label>
+        <label class="opt"><input type="radio" name="affiliation" value="อบจ. (รพ.สต. ถ่ายโอน)" onchange="showAssign()"><span>องค์การบริหารส่วนจังหวัด — รพ.สต. ถ่ายโอน<small>รับผิดชอบค่าที่พักเอง</small></span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q" for="province">จังหวัดที่ปฏิบัติงาน <span class="req">*</span></label>
+      <div class="hint">ตัวเลขหน้าชื่อจังหวัดคือเขตสุขภาพ</div>
+      <select id="province" onchange="showAssign()"><option value="">เลือกจังหวัด</option></select>
+    </div>
+
+    <dl class="assign hide" id="assign"></dl>
+
+    <div class="nav">
+      <button class="back" onclick="go('screen')">ย้อนกลับ</button>
+      <button class="go" onclick="okArea()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- 3 ---------------------------------------------------------- person -->
+  <section id="s-person" class="hide">
+    <h2>ข้อมูลผู้แสดงความประสงค์</h2>
+    <p class="lede">ชื่อภาษาอังกฤษจะใช้พิมพ์บนใบประกาศนียบัตร</p>
+
+    <div class="field">
+      <label class="q">คำนำหน้า <span class="req">*</span></label>
+      <div class="opts" data-name="prefix" style="flex-direction:row;flex-wrap:wrap">
+        <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นาย"><span>นาย</span></label>
+        <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นาง"><span>นาง</span></label>
+        <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นางสาว"><span>นางสาว</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">ชื่อ–นามสกุล ภาษาไทย <span class="req">*</span></label>
+      <div class="two">
+        <input type="text" id="firstNameTh" placeholder="ชื่อ" autocomplete="given-name">
+        <input type="text" id="lastNameTh" placeholder="นามสกุล" autocomplete="family-name">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">ชื่อ–นามสกุล ภาษาอังกฤษ <span class="req">*</span></label>
+      <div class="hint">ตรวจตัวสะกดให้ถูกต้อง จะพิมพ์ลงใบประกาศตามนี้</div>
+      <div class="two">
+        <input type="text" id="firstNameEn" placeholder="First name">
+        <input type="text" id="lastNameEn" placeholder="Last name">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">เพศ <span class="req">*</span></label>
+      <div class="hint">ใช้สำหรับจัดห้องพักคู่เท่านั้น</div>
+      <div class="opts" data-name="sex" style="flex-direction:row">
+        <label class="opt" style="flex:1"><input type="radio" name="sex" value="ชาย"><span>ชาย</span></label>
+        <label class="opt" style="flex:1"><input type="radio" name="sex" value="หญิง"><span>หญิง</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">ประเภทการจ้าง <span class="req">*</span></label>
+      <div class="opts" data-name="empType">
+        <label class="opt"><input type="radio" name="empType" value="ข้าราชการ" onchange="toggleLevel()"><span>ข้าราชการ</span></label>
+        <label class="opt"><input type="radio" name="empType" value="พนักงานราชการ" onchange="toggleLevel()"><span>พนักงานราชการ</span></label>
+        <label class="opt"><input type="radio" name="empType" value="พนักงานกระทรวงสาธารณสุข" onchange="toggleLevel()"><span>พนักงานกระทรวงสาธารณสุข</span></label>
+        <label class="opt"><input type="radio" name="empType" value="อื่น" onchange="toggleLevel()"><span>อื่น ๆ<small>เช่น ลูกจ้างประจำ ลูกจ้างชั่วคราว จ้างเหมาบริการ</small></span></label>
+      </div>
+      <input type="text" id="empTypeOther" class="hide" style="margin-top:.55rem" placeholder="ระบุประเภทการจ้าง">
+    </div>
+
+    <div class="field hide" id="levelField">
+      <label class="q" for="level">ระดับ <span class="req">*</span></label>
+      <div class="hint" id="levelHint">ระดับตามตำแหน่งในทะเบียนประวัติ</div>
+      <select id="level" onchange="toggleLevelOther()"><option value="">เลือกระดับ</option></select>
+      <input type="text" id="levelOther" class="hide" style="margin-top:.55rem" placeholder="ระบุระดับ">
+    </div>
+
+    <div class="field"><label class="q" for="phone">โทรศัพท์มือถือ <span class="req">*</span></label>
+      <div class="hint">เลข 10 หลัก ไม่ต้องใส่ขีด</div>
+      <input type="tel" id="phone" inputmode="numeric" maxlength="10" placeholder="0812345678" autocomplete="tel"></div>
+
+    <div class="field"><label class="q" for="email">อีเมล <span class="req">*</span></label>
+      <div class="hint">ใช้ส่งอีเมลยืนยันและประกาศผล ตรวจให้ถูกต้อง</div>
+      <input type="email" id="email" autocomplete="email"></div>
+
+    <div class="field"><label class="q" for="lineId">Line ID</label>
+      <div class="hint">ไม่บังคับ ใช้สำหรับกลุ่มประสานงานรุ่น</div>
+      <input type="text" id="lineId"></div>
+
+    <div class="nav">
+      <button class="back" onclick="go('area')">ย้อนกลับ</button>
+      <button class="go" onclick="okPerson()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- 4 ------------------------------------------------------------- org -->
+  <section id="s-org" class="hide">
+    <h2>หน่วยงาน</h2>
+    <p class="lede">ใช้ตรวจสอบร่วมกับ สสจ. และ อบจ. ตอนจัดสรรโควตา</p>
+
+    <div class="field"><label class="q" for="facility">ชื่อหน่วยบริการ <span class="req">*</span></label>
+      <div class="hint">เช่น รพ.สต.บ้านหนองแวง</div>
+      <input type="text" id="facility"></div>
+
+    <div class="field"><label class="q" for="district">อำเภอ <span class="req">*</span></label>
+      <input type="text" id="district"></div>
+
+
+    <div class="nav">
+      <button class="back" onclick="go('person')">ย้อนกลับ</button>
+      <button class="go" onclick="okOrg()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- 5 ------------------------------------------------------------ stay -->
+  <section id="s-stay" class="hide">
+    <h2>ที่พักและอาหาร</h2>
+    <p class="lede" id="stayLede"></p>
+
+    <div class="field">
+      <label class="q">ความประสงค์เรื่องที่พัก <span class="req">*</span></label>
+      <div class="opts" data-name="stay">
+        <label class="opt"><input type="radio" name="stay" value="ประสงค์ใช้ที่พักที่ผู้จัดเตรียม"><span>ประสงค์ใช้ที่พักที่ผู้จัดเตรียมให้ (พักคู่)</span></label>
+        <label class="opt"><input type="radio" name="stay" value="ไม่ประสงค์"><span>ไม่ประสงค์<small>เดินทางไป-กลับ หรือจัดหาที่พักเอง</small></span></label>
+        <label class="opt"><input type="radio" name="stay" value="ยังไม่แน่ใจ"><span>ยังไม่แน่ใจ<small>ขอตัดสินใจเมื่อทราบรายละเอียดที่พัก</small></span></label>
+      </div>
+    </div>
+
+    <div class="field"><label class="q" for="roommate">ประสงค์พักร่วมห้องกับ</label>
+      <div class="hint">ไม่บังคับ หากไม่ระบุ ผู้จัดจะจัดคู่พักให้</div>
+      <input type="text" id="roommate"></div>
+
+    <div class="field">
+      <label class="q">อาหาร <span class="req">*</span></label>
+      <div class="opts" data-name="food">
+        <label class="opt"><input type="radio" name="food" value="ปกติ"><span>ปกติ</span></label>
+        <label class="opt"><input type="radio" name="food" value="อิสลาม/ฮาลาล"><span>อิสลาม หรือ ฮาลาล</span></label>
+        <label class="opt"><input type="radio" name="food" value="มังสวิรัติ/เจ"><span>มังสวิรัติ หรือ เจ</span></label>
+        <label class="opt"><input type="radio" name="food" value="อื่น" onchange="toggleFood()"><span>อื่น ๆ</span></label>
+      </div>
+      <input type="text" id="foodOther" class="hide" style="margin-top:.5rem" placeholder="ระบุความต้องการด้านอาหาร">
+    </div>
+
+    <div class="field">
+      <label class="q">หากโควตาของเขตและสังกัดของท่านมีผู้แสดงความประสงค์เกินจำนวน ท่านยินดีเข้าอบรมในรุ่นอื่นหรือไม่ <span class="req">*</span></label>
+      <div class="hint">การตอบว่ายินดีจะเพิ่มโอกาสได้รับการจัดสรร</div>
+      <div class="opts" data-name="flexible">
+        <label class="opt"><input type="radio" name="flexible" value="ยินดี"><span>ยินดีเข้าอบรมรุ่นอื่น</span></label>
+        <label class="opt"><input type="radio" name="flexible" value="ไม่สะดวก"><span>ไม่สะดวก ขอเข้าอบรมเฉพาะรุ่นของเขตตนเอง</span></label>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="back" onclick="go('org')">ย้อนกลับ</button>
+      <button class="go" onclick="okStay()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- 6 ----------------------------------------------------------- pledge -->
+  <section id="s-pledge" class="hide">
+    <h2>ข้อผูกพันของผู้เข้ารับการอบรม</h2>
+    <p class="lede">ต้องยอมรับครบทุกข้อจึงจะส่งข้อมูลได้</p>
+    <div class="opts" id="pledges"></div>
+    <div class="nav">
+      <button class="back" onclick="go('stay')">ย้อนกลับ</button>
+      <button class="go" onclick="okPledge()">ถัดไป</button>
+    </div>
+  </section>
+
+  <!-- 7 ---------------------------------------------------------- review -->
+  <section id="s-review" class="hide">
+    <h2>ตรวจทานก่อนส่ง</h2>
+    <p class="lede">ตรวจชื่อภาษาอังกฤษ อีเมล และเบอร์โทรศัพท์ให้ถูกต้อง</p>
+    <dl class="sum" id="sum"></dl>
+    <div class="note" style="margin-top:1.3rem">
+      <b>การส่งข้อมูลนี้ยังไม่ใช่การยืนยันสิทธิ์</b>
+      สำนักทันตสาธารณสุขจะพิจารณาจัดสรรร่วมกับเขตสุขภาพ และประกาศรายชื่อผู้มีสิทธิ์เข้าอบรมในวันที่ 9 ตุลาคม 2569
+    </div>
+    <div class="nav">
+      <button class="back" onclick="go('pledge')">ย้อนกลับ</button>
+      <button class="go" id="submitBtn" onclick="submitForm()">ส่งข้อมูล</button>
+    </div>
+  </section>
+
+  <!-- 8 ------------------------------------------------------------ done -->
+  <section id="s-done" class="hide">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#1c4fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
+    <h2>บันทึกความประสงค์เรียบร้อยแล้ว</h2>
+    <p class="lede">ระบบจะส่งอีเมลยืนยันไปยังอีเมลที่ท่านกรอกไว้</p>
+    <p style="margin:1.2rem 0 .3rem;color:var(--muted);font-size:.88rem;font-weight:500">เลขที่การสมัคร</p>
+    <div class="done-code" id="doneCode"></div>
+    <dl class="sum" id="doneSum" style="margin-top:1.3rem"></dl>
+    <div class="note">
+      <b>สถานะ: อยู่ระหว่างการพิจารณาจัดสรร</b>
+      ประกาศรายชื่อผู้มีสิทธิ์เข้าอบรม 9 ตุลาคม 2569 ทางเว็บไซต์และอีเมล
+      <br><br>อีเมลยืนยันอาจใช้เวลาถึง 1 วันทำการในช่วงที่มีผู้สมัครจำนวนมาก
+      <b>ข้อมูลของท่านบันทึกเรียบร้อยแล้ว ไม่ต้องส่งซ้ำ</b>
+      โปรดบันทึกเลขที่การสมัครข้างต้นไว้ และตรวจกล่องจดหมายขยะด้วย
+    </div>
+  </section>
+</div>
+</main>
+
+<footer id="footer">สอบถามเพิ่มเติม <span id="contact">ผู้ประสานงาน</span> · สำนักทันตสาธารณสุข กรมอนามัย</footer>
+
+<script>
+/* ============================ ตั้งค่า ============================ */
+var API = 'วาง_URL_ของ_APPS_SCRIPT_ตรงนี้';   // .../exec
+var CONTACT = 'คุณ[ชื่อ] โทร 0X-XXX-XXXX';
+
+var RUNS = {
+  1:{label:'รุ่นที่ 1', zones:[7,8,9,10],     date:'18–20 พฤศจิกายน 2569', place:'จังหวัดนครราชสีมา',   ready:true},
+  2:{label:'รุ่นที่ 2', zones:[4,5,6,11,12],  date:'25–27 พฤศจิกายน 2569', place:'กรุงเทพฯ หรือปริมณฑล', ready:true},
+  3:{label:'รุ่นที่ 3', zones:[1,2,3],        date:'23–25 ธันวาคม 2569',   place:'จังหวัดนครสวรรค์',    ready:true}
+};
+
+var PROVINCES = [
+ ['เชียงใหม่',1],['เชียงราย',1],['ลำพูน',1],['ลำปาง',1],['แพร่',1],['น่าน',1],['พะเยา',1],['แม่ฮ่องสอน',1],
+ ['พิษณุโลก',2],['ตาก',2],['เพชรบูรณ์',2],['สุโขทัย',2],['อุตรดิตถ์',2],
+ ['นครสวรรค์',3],['กำแพงเพชร',3],['ชัยนาท',3],['พิจิตร',3],['อุทัยธานี',3],
+ ['สระบุรี',4],['นนทบุรี',4],['ปทุมธานี',4],['พระนครศรีอยุธยา',4],['อ่างทอง',4],['ลพบุรี',4],['สิงห์บุรี',4],['นครนายก',4],
+ ['ราชบุรี',5],['กาญจนบุรี',5],['สุพรรณบุรี',5],['นครปฐม',5],['สมุทรสาคร',5],['สมุทรสงคราม',5],['เพชรบุรี',5],['ประจวบคีรีขันธ์',5],
+ ['ชลบุรี',6],['ระยอง',6],['จันทบุรี',6],['ตราด',6],['ฉะเชิงเทรา',6],['ปราจีนบุรี',6],['สระแก้ว',6],['สมุทรปราการ',6],
+ ['ขอนแก่น',7],['มหาสารคาม',7],['ร้อยเอ็ด',7],['กาฬสินธุ์',7],
+ ['อุดรธานี',8],['สกลนคร',8],['นครพนม',8],['เลย',8],['หนองคาย',8],['หนองบัวลำภู',8],['บึงกาฬ',8],
+ ['นครราชสีมา',9],['ชัยภูมิ',9],['บุรีรัมย์',9],['สุรินทร์',9],
+ ['อุบลราชธานี',10],['ศรีสะเกษ',10],['ยโสธร',10],['อำนาจเจริญ',10],['มุกดาหาร',10],
+ ['สุราษฎร์ธานี',11],['นครศรีธรรมราช',11],['กระบี่',11],['พังงา',11],['ภูเก็ต',11],['ชุมพร',11],['ระนอง',11],
+ ['สงขลา',12],['ตรัง',12],['พัทลุง',12],['ปัตตานี',12],['ยะลา',12],['นราธิวาส',12],['สตูล',12]
+];
+
+var PLEDGES = [
+ 'ข้าพเจ้าได้แจ้งและได้รับความเห็นชอบจากต้นสังกัด (สสจ. หรือ อบจ.) ให้เข้ารับการอบรมแล้ว',
+ 'ข้าพเจ้าจะเข้ารับการอบรมครบทั้ง 3 วัน',
+ 'ข้าพเจ้าจะเข้าร่วม workshop ไม่น้อยกว่า 90% ของเวลา',
+ 'ข้าพเจ้าจะเข้าร่วมเครือข่ายผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ',
+ 'ข้าพเจ้ายินยอมให้สำนักทันตสาธารณสุขเก็บรวบรวมและใช้ข้อมูลนี้เพื่อการจัดอบรมและติดตามผล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล'
+];
+
+/* ============================ ตัวช่วย ============================ */
+var STEPS = ['intro','screen','area','person','org','stay','pledge','review','done'];
+var LABELS = ['ก่อนเริ่ม','คุณสมบัติ','พื้นที่','ข้อมูลส่วนตัว','หน่วยงาน','ที่พักและอาหาร','ข้อผูกพัน','ตรวจทาน','เสร็จสิ้น'];
+var cur = 'intro';
+
+function $(id){ return document.getElementById(id); }
+function val(id){ var el=$(id); return el ? el.value.trim() : ''; }
+function radio(n){ var el=document.querySelector('input[name="'+n+'"]:checked'); return el?el.value:''; }
+function esc(s){ var d=document.createElement('div'); d.textContent=s==null?'':s; return d.innerHTML; }
+
+function go(id){
+  STEPS.forEach(function(s){ var el=$('s-'+s); if(el) el.classList.add('hide'); });
+  $('s-fail').classList.add('hide');
+  var t=$('s-'+id); if(t) t.classList.remove('hide');
+  cur=id; clearErr(); paintTrack();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function fail(){
+  STEPS.forEach(function(s){ var el=$('s-'+s); if(el) el.classList.add('hide'); });
+  $('s-fail').classList.remove('hide'); clearErr();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function paintTrack(){
+  var i=STEPS.indexOf(cur); if(i<0) return;
+  var tr=$('track'); tr.innerHTML='';
+  for(var k=0;k<STEPS.length;k++){ var b=document.createElement('i'); if(k<=i) b.className='on'; tr.appendChild(b); }
+  $('tracklbl').textContent='ขั้นที่ '+(i+1)+' จาก '+STEPS.length+' — '+LABELS[i];
+}
+function showErr(m){ var e=$('err'); e.textContent=m; e.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+function clearErr(){ $('err').classList.remove('show'); }
+
+document.addEventListener('change', function(e){
+  if(e.target.type==='radio'){
+    var box=e.target.closest('.opts');
+    if(box) box.querySelectorAll('.opt').forEach(function(o){ o.classList.toggle('sel', o.querySelector('input').checked); });
+  }
+  if(e.target.type==='checkbox'){
+    var l=e.target.closest('.opt'); if(l) l.classList.toggle('sel', e.target.checked);
+  }
+});
+
+function zoneOf(p){ for(var i=0;i<PROVINCES.length;i++) if(PROVINCES[i][0]===p) return PROVINCES[i][1]; return null; }
+function runOf(z){ for(var k in RUNS) if(RUNS[k].zones.indexOf(z)>=0) return RUNS[k]; return null; }
+
+/* ============================ ตรวจแต่ละขั้น ============================ */
+function okScreen(){
+  var names=['position_type','unit','primary_care','experience'];
+  for(var i=0;i<names.length;i++) if(!radio(names[i])) return showErr('กรุณาตอบให้ครบทุกข้อ');
+  var bad=document.querySelectorAll('#s-screen input[data-fail]:checked');
+  if(bad.length) return fail();
+  go('area');
+}
+
+function showAssign(){
+  var p=val('province'), a=radio('affiliation'), box=$('assign');
+  if(!p){ box.classList.add('hide'); return; }
+  var z=zoneOf(p), r=runOf(z);
+  var stay = a ? (a.indexOf('อบจ')>=0
+      ? 'รับผิดชอบค่าที่พักเอง (พักคู่) ผู้จัดสำรองห้องให้ได้'
+      : 'ผู้จัดรับผิดชอบค่าที่พัก (พักคู่)') : 'เลือกสังกัดเพื่อดูเงื่อนไขค่าที่พัก';
+  box.innerHTML =
+    '<dt>เขตสุขภาพ</dt><dd>เขต '+z+'</dd>'+
+    '<dt>รุ่นที่จัดสรร</dt><dd>'+esc(r.label)+'</dd>'+
+    '<dt>วันอบรม</dt><dd>'+esc(r.date)+'</dd>'+
+    '<dt>สถานที่</dt><dd>'+esc(r.place)+'</dd>'+
+    '<dt>ค่าที่พัก</dt><dd>'+esc(stay)+'</dd>'+
+    (r.ready?'':'<dt>หมายเหตุ</dt><dd style="font-weight:400">วันอบรมของรุ่นนี้อยู่ระหว่างกำหนด จะแจ้งพร้อมประกาศรายชื่อ 9 ต.ค. 2569</dd>');
+  box.classList.remove('hide');
+}
+
+function okArea(){
+  if(!radio('affiliation')) return showErr('กรุณาเลือกสังกัด');
+  if(!val('province'))      return showErr('กรุณาเลือกจังหวัด');
+  go('person');
+}
+
+function okPerson(){
+  if(!radio('prefix'))  return showErr('กรุณาเลือกคำนำหน้า');
+  if(!val('firstNameTh')||!val('lastNameTh')) return showErr('กรุณากรอกชื่อและนามสกุลภาษาไทยให้ครบ');
+  if(!val('firstNameEn')||!val('lastNameEn')) return showErr('กรุณากรอกชื่อและนามสกุลภาษาอังกฤษให้ครบ');
+  if(!radio('sex'))     return showErr('กรุณาเลือกเพศ');
+  if(!radio('empType')) return showErr('กรุณาเลือกประเภทการจ้าง');
+  if(radio('empType')==='อื่น' && !val('empTypeOther')) return showErr('กรุณาระบุประเภทการจ้าง');
+  if(radio('empType')==='ข้าราชการ'){
+    if(!val('level')) return showErr('กรุณาเลือกระดับ');
+    if(val('level')==='อื่น ๆ' && !val('levelOther')) return showErr('กรุณาระบุระดับ');
+  }
+  if(!/^0[0-9]{9}$/.test(val('phone'))) return showErr('เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก ขึ้นต้นด้วย 0');
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('email'))) return showErr('รูปแบบอีเมลไม่ถูกต้อง');
+  go('org');
+}
+
+function okOrg(){
+  if(!val('facility')) return showErr('กรุณากรอกชื่อหน่วยบริการ');
+  if(!val('district')) return showErr('กรุณากรอกอำเภอ');
+  var a=radio('affiliation');
+  $('stayLede').textContent = a.indexOf('อบจ')>=0
+    ? 'ผู้เข้าอบรมสังกัด อบจ. รับผิดชอบค่าที่พักเอง (พักคู่) ขณะนี้อยู่ระหว่างจัดหาที่พักบางรุ่น จะแจ้งอัตราค่าห้องพร้อมประกาศรายชื่อ'
+    : 'ผู้เข้าอบรมสังกัดกระทรวงสาธารณสุข ผู้จัดรับผิดชอบค่าที่พักให้ (พักคู่)';
+  go('stay');
+}
+
+var LEVELS = {
+  'นักวิชาการสาธารณสุข':['ปฏิบัติการ','ชำนาญการ','ชำนาญการพิเศษ'],
+  'เจ้าพนักงานทันตสาธารณสุข':['ปฏิบัติงาน','ชำนาญงาน','อาวุโส']
+};
+
+function fillLevels(){
+  var pos=radio('position_type'), sel=$('level');
+  if(!sel) return;
+  var keep=sel.value;
+  sel.innerHTML='<option value="">เลือกระดับ</option>';
+  (LEVELS[pos]||[]).concat(['อื่น ๆ']).forEach(function(t){
+    var o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o);
+  });
+  if(keep) sel.value=keep;
+  $('levelHint').textContent = pos ? ('ระดับของตำแหน่ง'+pos) : 'ระดับตามตำแหน่งในทะเบียนประวัติ';
+}
+function toggleLevel(){
+  var isOfficer = radio('empType')==='ข้าราชการ';
+  $('levelField').classList.toggle('hide', !isOfficer);
+  $('empTypeOther').classList.toggle('hide', radio('empType')!=='อื่น');
+  if(isOfficer) fillLevels(); else { $('level').value=''; $('levelOther').classList.add('hide'); }
+}
+function toggleLevelOther(){ $('levelOther').classList.toggle('hide', val('level')!=='อื่น ๆ'); }
+
+function toggleFood(){ $('foodOther').classList.toggle('hide', radio('food')!=='อื่น'); }
+
+function okStay(){
+  if(!radio('stay'))     return showErr('กรุณาเลือกความประสงค์เรื่องที่พัก');
+  if(!radio('food'))     return showErr('กรุณาเลือกประเภทอาหาร');
+  if(radio('food')==='อื่น' && !val('foodOther')) return showErr('กรุณาระบุความต้องการด้านอาหาร');
+  if(!radio('flexible')) return showErr('กรุณาตอบเรื่องการย้ายรุ่น');
+  go('pledge');
+}
+
+function okPledge(){
+  var boxes=document.querySelectorAll('#pledges input');
+  for(var i=0;i<boxes.length;i++) if(!boxes[i].checked) return showErr('ต้องยอมรับครบทุกข้อจึงจะดำเนินการต่อได้');
+  buildSummary(); go('review');
+}
+
+/* ============================ สรุปและส่ง ============================ */
+function collect(){
+  var p=val('province'), z=zoneOf(p), r=runOf(z);
+  return {
+    action:'register',
+    affiliation:radio('affiliation'), zone:z, province:p, run:r.label, runDate:r.date, runPlace:r.place,
+    prefix:radio('prefix'),
+    firstNameTh:val('firstNameTh'), lastNameTh:val('lastNameTh'),
+    firstNameEn:val('firstNameEn'), lastNameEn:val('lastNameEn'),
+    nameTh:val('firstNameTh')+' '+val('lastNameTh'),
+    nameEn:val('firstNameEn')+' '+val('lastNameEn'),
+    sex:radio('sex'),
+    position:radio('position_type'),
+    empType: radio('empType')==='อื่น' ? 'อื่น: '+val('empTypeOther') : radio('empType'),
+    level: radio('empType')!=='ข้าราชการ' ? '-' : (val('level')==='อื่น ๆ' ? val('levelOther') : val('level')),
+    phone:val('phone'), email:val('email'), lineId:val('lineId'),
+    facility:val('facility'), district:val('district'), experience:radio('experience'),
+    stay:radio('stay'), roommate:val('roommate'),
+    food: radio('food')==='อื่น' ? 'อื่น: '+val('foodOther') : radio('food'),
+    flexible:radio('flexible')
+  };
+}
+
+function rows(d){
+  return [
+    ['สังกัด',d.affiliation],['พื้นที่','เขต '+d.zone+' — '+d.province],
+    ['รุ่น',d.run],['วันอบรม',d.runDate],['สถานที่',d.runPlace],
+    ['ชื่อ–สกุล',d.prefix+d.nameTh],['ชื่ออังกฤษ',d.nameEn],
+    ['ตำแหน่ง',d.position],['ประเภทการจ้าง',d.empType],['ระดับ',d.level],
+    ['โทรศัพท์',d.phone],['อีเมล',d.email],
+    ['หน่วยบริการ',d.facility],['อำเภอ',d.district],
+    ['ที่พัก',d.stay],['อาหาร',d.food],['ย้ายรุ่น',d.flexible]
+  ];
+}
+
+function buildSummary(){
+  var d=collect(), h='';
+  rows(d).forEach(function(r){ h+='<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'; });
+  $('sum').innerHTML=h;
+}
+
+function submitForm(){
+  var btn=$('submitBtn'); btn.disabled=true; btn.textContent='กำลังส่ง…'; clearErr();
+  var d=collect();
+  fetch(API,{ method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(d) })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(!res.ok){ throw new Error(res.error||'ส่งข้อมูลไม่สำเร็จ'); }
+      $('doneCode').textContent=res.code;
+      var h=''; rows(d).forEach(function(r){ h+='<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'; });
+      $('doneSum').innerHTML=h;
+      go('done');
+    })
+    .catch(function(e){
+      showErr(e.message+' — หากยังส่งไม่ได้ โปรดติดต่อผู้ประสานงาน');
+      btn.disabled=false; btn.textContent='ส่งข้อมูล';
+    });
+}
+
+/* ============================ เริ่มต้น ============================ */
+(function init(){
+  var sel=$('province');
+  PROVINCES.forEach(function(p){
+    var o=document.createElement('option');
+    o.value=p[0]; o.textContent='เขต '+p[1]+' — '+p[0];
+    sel.appendChild(o);
+  });
+  var pl=$('pledges');
+  PLEDGES.forEach(function(t,i){
+    var l=document.createElement('label'); l.className='opt';
+    l.innerHTML='<input type="checkbox" id="pl'+i+'"><span>'+esc(t)+'</span>';
+    pl.appendChild(l);
+  });
+  $('contact').textContent=CONTACT;
+  paintTrack();
+})();
+</script>
+</body>
+</html>
