@@ -221,7 +221,7 @@ a{color:var(--blue)}
     <div class="field">
       <label class="q">ปัจจุบันรับผิดชอบงานทันตกรรมปฐมภูมิหรือได้ทำงานปฐมภูมิหรือไม่ <span class="req">*</span></label>
       <div class="opts" data-name="primary_care">
-        <label class="opt"><input type="radio" name="primary_care" value="รับผิดชอบ"><span>รับผิดชอบ</span></label>
+        <label class="opt"><input type="radio" name="primary_care" value="รับผิดชอบ"><span>รับผิดชอบ/ทำงานปฐมภูมิ</span></label>
         <label class="opt"><input type="radio" name="primary_care" value="ไม่" data-fail="1"><span>ไม่ได้รับผิดชอบ</span></label>
       </div>
     </div>
@@ -260,8 +260,8 @@ a{color:var(--blue)}
     <div class="field">
       <label class="q">สังกัด <span class="req">*</span></label>
       <div class="opts" data-name="affiliation">
-        <label class="opt"><input type="radio" name="affiliation" value="กระทรวงสาธารณสุข (สสจ.)" onchange="showAssign()"><span>กระทรวงสาธารณสุข (สสจ.)<small>ผู้จัดรับผิดชอบค่าที่พัก</small></span></label>
-        <label class="opt"><input type="radio" name="affiliation" value="อบจ. (รพ.สต. ถ่ายโอน)" onchange="showAssign()"><span>องค์การบริหารส่วนจังหวัด — รพ.สต. ถ่ายโอน<small>รับผิดชอบค่าที่พักเอง</small></span></label>
+        <label class="opt"><input type="radio" name="affiliation" value="กระทรวงสาธารณสุข (สสจ.)" onchange="showAssign()"><span>กระทรวงสาธารณสุข (สสจ.)<small>ผู้จัดรับผิดชอบค่าที่พัก (พักคู่เท่านั้น) หากประสงค์พักเดี่ยวจะมีข้อคำถามในตอนถัด ๆ ไป</small></span></label>
+        <label class="opt"><input type="radio" name="affiliation" value="อบจ. (รพ.สต. ถ่ายโอน)" onchange="showAssign()"><span>องค์การบริหารส่วนจังหวัด — รพ.สต. ถ่ายโอน<small>ผู้อบรมเบิกค่าที่พักจากต้นสังกัด</small></span></label>
       </div>
     </div>
 
