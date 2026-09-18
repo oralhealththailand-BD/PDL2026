@@ -248,15 +248,31 @@ function logout(){
 function load(){
   $('meta').textContent = 'กำลังโหลด…';
   $('err').classList.add('hide');
+  var t0 = Date.now();
   fetch(API, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({ action: 'dashboard', key: KEY })
   })
-  .then(function(r){ return r.json(); })
-  .then(onData)
+  .then(function(r){
+    return r.text().then(function(txt){ return { status: r.status, txt: txt }; });
+  })
+  .then(function(res){
+    var secs = Math.round((Date.now()-t0)/1000);
+    var data;
+    try { data = JSON.parse(res.txt); }
+    catch(e){
+      var hint = res.txt.indexOf('<') === 0
+        ? 'เซิร์ฟเวอร์ตอบเป็นหน้าเว็บแทน JSON — มักเกิดเมื่อสคริปต์ทำงานนานเกินกำหนดแล้วถูกตัด หรือยังไม่ได้ Deploy เวอร์ชันล่าสุด'
+        : 'ข้อมูลที่ได้กลับมาอ่านไม่ออก';
+      fail('โหลดไม่สำเร็จ (HTTP ' + res.status + ', ใช้เวลา ' + secs + ' วินาที) — ' + hint);
+      return;
+    }
+    onData(data, secs);
+  })
   .catch(function(e){
-    fail('เชื่อมต่อไม่สำเร็จ — ตรวจว่าใส่ URL /exec ถูกต้อง และ Deploy เวอร์ชันล่าสุดแล้ว');
+    fail('เชื่อมต่อไม่สำเร็จ — ตรวจว่าใส่ URL /exec ถูกต้อง และ Deploy เวอร์ชันล่าสุดแล้ว'
+         + (e && e.message ? ' (' + e.message + ')' : ''));
   });
 }
 
@@ -266,7 +282,7 @@ function fail(msg){
   $('meta').textContent = '';
 }
 
-function onData(res){
+function onData(res, secs){
   if(!res || !res.ok){
     fail(res && res.error ? res.error : 'โหลดข้อมูลไม่สำเร็จ');
     if(res && res.error && res.error.indexOf('รหัส')>=0) logout();
@@ -275,7 +291,8 @@ function onData(res){
   RAW = res.rows || [];
   $('meta').textContent = 'ข้อมูล ณ ' + (res.updated||'') +
     ' · ทั้งหมด ' + RAW.length + ' คน · อีเมลค้างส่ง ' + (res.pending||0) +
-    ' · ' + (res.open ? 'เปิดรับอยู่' : 'ปิดรับแล้ว');
+    ' · ' + (res.open ? 'เปิดรับอยู่' : 'ปิดรับแล้ว') +
+    (secs ? ' · โหลด ' + secs + ' วินาที' : '');
   buildFilters();
   render();
 }
