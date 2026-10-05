@@ -26,7 +26,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ---- masthead: navy field, silver hairline, tight display type ---- */
+/* ---- masthead ---- */
 .masthead{
   background:linear-gradient(158deg,var(--navy) 0%,#102a52 58%,var(--navy-2) 100%);
   color:#fff; padding:2rem 1.25rem 1.8rem; position:relative; overflow:hidden;
@@ -156,7 +156,7 @@ a{color:var(--blue)}
   <div class="in">
     <div class="org">สำนักทันตสาธารณสุข กรมอนามัย กระทรวงสาธารณสุข</div>
     <h1>แสดงความประสงค์เข้ารับการอบรม<br>ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</h1>
-    <div class="sub">ปิดรับ 2 ตุลาคม 2569 · ประกาศรายชื่อ 9 ตุลาคม 2569</div>
+    <div class="sub">วันปิดรับสมัครและวันประกาศรายชื่อต่างกันในแต่ละรุ่น · ดูตารางด้านล่าง</div>
   </div>
 </header>
 
@@ -176,11 +176,11 @@ a{color:var(--blue)}
     <p>การอบรมจัดขึ้น 3 รุ่น รุ่นละ 80 คน แบ่งเป็นสังกัดกระทรวงสาธารณสุข 40 คน และองค์การบริหารส่วนจังหวัด 40 คน ท่านจะถูกจัดเข้ารุ่นตามเขตสุขภาพของจังหวัดที่ปฏิบัติงาน</p>
 
     <table class="runs">
-      <thead><tr><th>รุ่น</th><th>เขตสุขภาพ</th><th>วันอบรม</th><th>สถานที่</th></tr></thead>
+      <thead><tr><th>รุ่น</th><th>เขตสุขภาพ</th><th>วันอบรม</th><th>สถานที่</th><th>ปิดรับสมัคร</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>7, 8, 9, 10</td><td>18–20 พ.ย. 2569</td><td>นครราชสีมา</td></tr>
-        <tr><td>2</td><td>4, 5, 6, 11, 12, 13</td><td>25–27 พ.ย. 2569</td><td>กรุงเทพฯ หรือปริมณฑล</td></tr>
-        <tr><td>3</td><td>1, 2, 3</td><td>23–25 ธ.ค. 2569</td><td>นครสวรรค์</td></tr>
+        <tr><td>1</td><td>7, 8, 9, 10</td><td>18–20 พ.ย. 2569</td><td>นครราชสีมา</td><td class="wait">2 ต.ค. 2569 (ปิดแล้ว)</td></tr>
+        <tr><td>2</td><td>4, 5, 6, 11, 12, 13</td><td>25–27 พ.ย. 2569</td><td>กรุงเทพฯ หรือปริมณฑล</td><td class="wait">2 ต.ค. 2569 (ปิดแล้ว)</td></tr>
+        <tr><td>3</td><td>1, 2, 3</td><td>23–25 ธ.ค. 2569</td><td>นครสวรรค์</td><td><b>30 ต.ค. 2569</b></td></tr>
       </tbody>
     </table>
 
@@ -367,7 +367,6 @@ a{color:var(--blue)}
     <div class="field"><label class="q" for="district">อำเภอ <span class="req">*</span></label>
       <input type="text" id="district"></div>
 
-
     <div class="nav">
       <button class="back" onclick="go('person')">ย้อนกลับ</button>
       <button class="go" onclick="okOrg()">ถัดไป</button>
@@ -402,15 +401,6 @@ a{color:var(--blue)}
       <input type="text" id="foodOther" class="hide" style="margin-top:.5rem" placeholder="ระบุความต้องการด้านอาหาร">
     </div>
 
-    <div class="field">
-      <label class="q">หากโควตาของเขตและสังกัดของท่านมีผู้แสดงความประสงค์เกินจำนวน ท่านยินดีเข้าอบรมในรุ่นอื่นหรือไม่ <span class="req">*</span></label>
-      <div class="hint">การตอบว่ายินดีจะเพิ่มโอกาสได้รับการจัดสรร</div>
-      <div class="opts" data-name="flexible">
-        <label class="opt"><input type="radio" name="flexible" value="ยินดี"><span>ยินดีเข้าอบรมรุ่นอื่น</span></label>
-        <label class="opt"><input type="radio" name="flexible" value="ไม่สะดวก"><span>ไม่สะดวก ขอเข้าอบรมเฉพาะรุ่นของเขตตนเอง</span></label>
-      </div>
-    </div>
-
     <div class="nav">
       <button class="back" onclick="go('org')">ย้อนกลับ</button>
       <button class="go" onclick="okStay()">ถัดไป</button>
@@ -435,7 +425,7 @@ a{color:var(--blue)}
     <dl class="sum" id="sum"></dl>
     <div class="note" style="margin-top:1.3rem">
       <b>การส่งข้อมูลนี้ยังไม่ใช่การยืนยันสิทธิ์</b>
-      สำนักทันตสาธารณสุขจะพิจารณาจัดสรรร่วมกับเขตสุขภาพ และประกาศรายชื่อผู้มีสิทธิ์เข้าอบรมในวันที่ 9 ตุลาคม 2569
+      สำนักทันตสาธารณสุขจะพิจารณาจัดสรรร่วมกับเขตสุขภาพ และประกาศรายชื่อผู้มีสิทธิ์เข้าอบรม<span id="announceReview">ตามกำหนดของรุ่นที่ท่านสังกัด</span>
     </div>
     <div class="nav">
       <button class="back" onclick="go('pledge')">ย้อนกลับ</button>
@@ -453,7 +443,7 @@ a{color:var(--blue)}
     <dl class="sum" id="doneSum" style="margin-top:1.3rem"></dl>
     <div class="note">
       <b>สถานะ: อยู่ระหว่างการพิจารณาจัดสรร</b>
-      ประกาศรายชื่อผู้มีสิทธิ์เข้าอบรม 9 ตุลาคม 2569 ทางเว็บไซต์และอีเมล
+      ประกาศรายชื่อผู้มีสิทธิ์เข้าอบรม <span id="announceDone">ตามกำหนดของรุ่น</span> ทางเว็บไซต์และอีเมล
       <br><br>อีเมลยืนยันอาจใช้เวลาถึง 1 วันทำการในช่วงที่มีผู้สมัครจำนวนมาก
       <b>ข้อมูลของท่านบันทึกเรียบร้อยแล้ว ไม่ต้องส่งซ้ำ</b>
       โปรดบันทึกเลขที่การสมัครข้างต้นไว้ และตรวจกล่องจดหมายขยะด้วย
@@ -470,9 +460,12 @@ var API = 'https://script.google.com/macros/s/AKfycbwPBlO9PrYNpMofFnwGE97JcHi2P8
 var CONTACT = 'กลุ่มพัฒนาระบบทันตสาธารณสุข โทร 02-590-4213';
 
 var RUNS = {
-  1:{label:'รุ่นที่ 1', zones:[7,8,9,10],     date:'18–20 พฤศจิกายน 2569', place:'จังหวัดนครราชสีมา',   ready:true},
-  2:{label:'รุ่นที่ 2', zones:[4,5,6,11,12,13],  date:'25–27 พฤศจิกายน 2569', place:'กรุงเทพฯ หรือปริมณฑล', ready:true},
-  3:{label:'รุ่นที่ 3', zones:[1,2,3],        date:'23–25 ธันวาคม 2569',   place:'จังหวัดนครสวรรค์',    ready:true}
+  1:{label:'รุ่นที่ 1', zones:[7,8,9,10],       date:'18–20 พฤศจิกายน 2569', place:'จังหวัดนครราชสีมา',   ready:true,
+     closeDate:new Date('2026-10-02T16:30:00+07:00'), closeText:'2 ตุลาคม 2569',  announce:'9 ตุลาคม 2569'},
+  2:{label:'รุ่นที่ 2', zones:[4,5,6,11,12,13], date:'25–27 พฤศจิกายน 2569', place:'กรุงเทพฯ หรือปริมณฑล', ready:true,
+     closeDate:new Date('2026-10-02T16:30:00+07:00'), closeText:'2 ตุลาคม 2569',  announce:'9 ตุลาคม 2569'},
+  3:{label:'รุ่นที่ 3', zones:[1,2,3],          date:'23–25 ธันวาคม 2569',   place:'จังหวัดนครสวรรค์',    ready:true,
+     closeDate:new Date('2026-10-30T16:30:00+07:00'), closeText:'30 ตุลาคม 2569', announce:'6 พฤศจิกายน 2569'}
 };
 
 var PROVINCES = [
@@ -539,6 +532,8 @@ document.addEventListener('change', function(e){
   }
 });
 
+function isClosed(r){ return r && r.closeDate && new Date() > r.closeDate; }
+
 function zoneOf(p){ for(var i=0;i<PROVINCES.length;i++) if(PROVINCES[i][0]===p) return PROVINCES[i][1]; return null; }
 function runOf(z){ for(var k in RUNS) if(RUNS[k].zones.indexOf(z)>=0) return RUNS[k]; return null; }
 
@@ -564,13 +559,17 @@ function showAssign(){
     '<dt>วันอบรม</dt><dd>'+esc(r.date)+'</dd>'+
     '<dt>สถานที่</dt><dd>'+esc(r.place)+'</dd>'+
     '<dt>ค่าที่พัก</dt><dd>'+esc(stay)+'</dd>'+
-    (r.ready?'':'<dt>หมายเหตุ</dt><dd style="font-weight:400">วันอบรมของรุ่นนี้อยู่ระหว่างกำหนด จะแจ้งพร้อมประกาศรายชื่อ 9 ต.ค. 2569</dd>');
+    '<dt>ปิดรับสมัคร</dt><dd>'+esc(r.closeText)+'</dd>'+
+    '<dt>ประกาศรายชื่อ</dt><dd>'+esc(r.announce)+'</dd>'+
+    (isClosed(r)?'<dt style="color:var(--danger)">สถานะ</dt><dd style="color:var(--danger)">ปิดรับสมัครแล้ว</dd>':'');
   box.classList.remove('hide');
 }
 
 function okArea(){
   if(!radio('affiliation')) return showErr('กรุณาเลือกสังกัด');
   if(!val('province'))      return showErr('กรุณาเลือกจังหวัด');
+  var r=runOf(zoneOf(val('province')));
+  if(isClosed(r)) return showErr(r.label+' ปิดรับการแสดงความประสงค์แล้วเมื่อ '+r.closeText+' — สอบถามเพิ่มเติม '+CONTACT);
   go('person');
 }
 
@@ -630,7 +629,6 @@ function okStay(){
   if(!radio('stay'))     return showErr('กรุณาเลือกความประสงค์เรื่องที่พัก');
   if(!radio('food'))     return showErr('กรุณาเลือกประเภทอาหาร');
   if(radio('food')==='อื่น' && !val('foodOther')) return showErr('กรุณาระบุความต้องการด้านอาหาร');
-  if(!radio('flexible')) return showErr('กรุณาตอบเรื่องการย้ายรุ่น');
   go('pledge');
 }
 
@@ -656,10 +654,11 @@ function collect(){
     empType: radio('empType')==='อื่น' ? 'อื่น: '+val('empTypeOther') : radio('empType'),
     level: radio('empType')!=='ข้าราชการ' ? '-' : (val('level')==='อื่น ๆ' ? val('levelOther') : val('level')),
     phone:val('phone'), email:val('email'), lineId:val('lineId'),
+    unit:radio('unit'),
     facility:val('facility'), district:val('district'), experience:radio('experience'),
     stay:radio('stay'), roommate:val('roommate'),
     food: radio('food')==='อื่น' ? 'อื่น: '+val('foodOther') : radio('food'),
-    flexible:radio('flexible')
+    flexible:'-'
   };
 }
 
@@ -671,12 +670,17 @@ function rows(d){
     ['ตำแหน่ง',d.position],['ประเภทการจ้าง',d.empType],['ระดับ',d.level],
     ['โทรศัพท์',d.phone],['อีเมล',d.email],
     ['หน่วยบริการ',d.facility],['อำเภอ',d.district],
-    ['ที่พัก',d.stay],['อาหาร',d.food],['ย้ายรุ่น',d.flexible]
+    ['ที่พัก',d.stay],['อาหาร',d.food]
   ];
 }
 
 function buildSummary(){
   var d=collect(), h='';
+  var rr=runOf(zoneOf(val('province')));
+  if(rr){
+    $('announceReview').textContent='ในวันที่ '+rr.announce;
+    $('announceDone').textContent=rr.announce;
+  }
   rows(d).forEach(function(r){ h+='<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'; });
   $('sum').innerHTML=h;
 }
