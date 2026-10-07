@@ -81,6 +81,37 @@ select{appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3C
 .note.warn{border-left-color:var(--warn-line);background:var(--warn-bg)}
 .note.danger{border-left-color:var(--danger);background:var(--danger-bg)}
 .note.danger b{color:#8c1c14}
+.note li b{display:inline;margin:0}
+.note ol{margin:.6rem 0 .6rem 1.15rem;padding:0}
+/* ---- หน้าตรวจทาน ---- */
+.rv-h{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      color:var(--blue);margin:1.5rem 0 .55rem;padding-bottom:.35rem;
+      border-bottom:1px solid var(--silver)}
+.rv-h:first-child{margin-top:.6rem}
+.rv-row{display:flex;gap:1rem;padding:.42rem 0;border-bottom:1px dashed var(--silver);
+        align-items:baseline}
+.rv-row:last-child{border-bottom:0}
+.rv-k{flex:0 0 38%;max-width:200px;color:#5a6779;font-size:.92rem}
+.rv-v{flex:1;color:var(--navy);font-weight:500;word-break:break-word}
+.rv-free{background:var(--info-bg);border-radius:10px;padding:.8rem 1rem;color:var(--navy);
+         white-space:pre-wrap;word-break:break-word}
+.rv-cert{background:var(--info-bg);border-radius:10px;padding:.9rem 1.1rem;
+         font-size:1.18rem;font-weight:700;color:var(--navy);line-height:1.45}
+.rv-cert span{display:block;font-size:.98rem;font-weight:500;color:#5a6779;margin-top:.15rem}
+.rv-photo{display:flex;gap:1.1rem;align-items:flex-start}
+.rv-photo>div:last-child{flex:1;min-width:0}
+.rv-photo img{width:104px;height:130px;object-fit:cover;border-radius:10px;
+              border:1.5px solid var(--line-2);flex:0 0 auto}
+.rv-nophoto{flex:0 0 104px;padding:.7rem .5rem;border:1.5px dashed var(--line-2);
+            border-radius:10px;font-size:.8rem;color:#5a6779;text-align:center;line-height:1.5}
+@media(max-width:520px){
+  .rv-row{display:block}
+  .rv-k{max-width:none;margin-bottom:.1rem;font-size:.85rem}
+  .rv-photo{flex-direction:column}
+}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#fff;
+      border:1px solid var(--silver);border-radius:6px;padding:.1rem .4rem;
+      letter-spacing:.3px;white-space:nowrap}
 .note.warn b{color:#7a4c08}
 .note ul{margin:.4rem 0 0 1.1rem}
 .note li{margin:.15rem 0}
@@ -185,7 +216,7 @@ a{color:var(--blue)}
       </div>
       <div class="nav">
         <button class="back" onclick="backToGate()">ย้อนกลับ</button>
-        <button class="go" id="subBtn1" onclick="submitAll()">ส่งการสละสิทธิ์</button>
+        <button class="go" id="subBtn1" onclick="goReview()">ตรวจทานก่อนส่ง</button>
       </div>
     </div>
 
@@ -288,7 +319,7 @@ a{color:var(--blue)}
       </div>
 
       <h3>ผู้ติดต่อกรณีฉุกเฉิน</h3>
-      <div class="hint" style="margin-bottom:.9rem">การอบรมเป็นแบบค้างคืน และมีการติดต่อประสานงาน จึงขอข้อมูลไว้ใช้เฉพาะกรณีจำเป็น</div>
+      <div class="hint" style="margin-bottom:.9rem">การอบรมเป็นแบบค้างคืน 3 วัน จึงขอข้อมูลไว้ใช้เฉพาะกรณีจำเป็น</div>
       <div class="two">
         <div class="field"><label class="q" for="emgName">ชื่อ–นามสกุล <span class="req">*</span></label><input type="text" id="emgName"></div>
         <div class="field"><label class="q" for="emgRelation">ความสัมพันธ์</label><input type="text" id="emgRelation" placeholder="เช่น คู่สมรส บิดา มารดา"></div>
@@ -298,12 +329,23 @@ a{color:var(--blue)}
 
       <div class="nav">
         <button class="back" onclick="backToGate()">ย้อนกลับ</button>
-        <button class="go" id="subBtn2" onclick="submitAll()">ยืนยันเข้าร่วมการอบรม</button>
+        <button class="go" id="subBtn2" onclick="goReview()">ตรวจทานข้อมูลก่อนยืนยัน</button>
       </div>
     </div>
   </section>
 
-  <!-- ขั้น 3 ------------------------------------------------------ done -->
+  <!-- ขั้น 3 --------------------------------------------------- review -->
+  <section id="s-review" class="hide">
+    <h2>ตรวจทานข้อมูลก่อนส่ง</h2>
+    <p class="lede">โปรดอ่านทบทวนอีกครั้ง หากมีจุดใดไม่ถูกต้อง กดแก้ไขข้อมูลเพื่อกลับไปปรับแก้ได้</p>
+    <div id="reviewBody"></div>
+    <div class="nav">
+      <button class="back" onclick="backToForm()">แก้ไขข้อมูล</button>
+      <button class="go" id="subBtn3" onclick="sendPayload()">ยืนยันและส่งข้อมูล</button>
+    </div>
+  </section>
+
+  <!-- ขั้น 4 ------------------------------------------------------ done -->
   <section id="s-done" class="hide">
     <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#1c4fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
     <h2 id="doneTitle"></h2>
@@ -338,7 +380,7 @@ function setRadio(n,v){
 function esc(s){ var d=document.createElement('div'); d.textContent=s==null?'':s; return d.innerHTML; }
 function showErr(m){ var e=$('err'); e.textContent=m; e.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
 function clearErr(){ $('err').classList.remove('show'); }
-function show(id){ ['s-gate','s-form','s-done'].forEach(function(s){ $(s).classList.add('hide'); });
+function show(id){ ['s-gate','s-form','s-review','s-done'].forEach(function(s){ $(s).classList.add('hide'); });
   $(id).classList.remove('hide'); clearErr(); window.scrollTo({top:0,behavior:'smooth'}); }
 
 document.addEventListener('change', function(e){
@@ -513,10 +555,13 @@ function pickPhoto(ev){
 }
 
 /* ============================ ส่งข้อมูล ============================ */
-function submitAll(){
+var PENDING = null;   // payload ที่ตรวจผ่านแล้ว รออนุมัติในหน้าตรวจทาน
+
+/* ตรวจความครบถ้วนและประกอบ payload  คืน null เมื่อยังไม่ผ่าน */
+function buildPayload(){
   clearErr();
   var dec=radio('decision');
-  if(!dec) return showErr('กรุณาเลือกว่าจะยืนยันเข้าร่วมหรือสละสิทธิ์');
+  if(!dec){ showErr('กรุณาเลือกว่าจะยืนยันเข้าร่วมหรือสละสิทธิ์'); return null; }
 
   var payload={ action:'confirm', code:ME.code, auth:AUTH, decision:dec };
 
@@ -568,11 +613,78 @@ function submitAll(){
     payload.emgPhone=val('emgPhone').replace(/[^0-9]/g,'');
   }
 
-  var btn = dec==='สละสิทธิ์' ? $('subBtn1') : $('subBtn2');
-  var label = btn.textContent;
+  return payload;
+}
+
+/* ---- หน้าตรวจทาน ---- */
+function row(label, value){
+  if(value==null || value==='') return '';
+  return '<div class="rv-row"><div class="rv-k">'+esc(label)+'</div>'+
+         '<div class="rv-v">'+esc(value)+'</div></div>';
+}
+function rvHead(t){ return '<h3 class="rv-h">'+esc(t)+'</h3>'; }
+
+function goReview(){
+  var p = buildPayload();
+  if(!p) return;
+  PENDING = p;
+
+  var h='';
+  h += '<div class="note"><b>'+esc(ME.code)+'</b>'+
+       esc(ME.run.label)+' · '+esc(ME.run.date)+'</div>';
+
+  if(p.decision==='สละสิทธิ์'){
+    h += '<div class="note danger"><b>ท่านเลือกสละสิทธิ์การเข้าร่วมอบรม</b>'+
+         'เมื่อส่งแล้ว ที่นั่งของท่านจะถูกจัดสรรให้ผู้อื่น และไม่สามารถกลับมายืนยันเข้าร่วมได้อีก</div>';
+    h += rvHead('เหตุผล') + '<div class="rv-free">'+esc(p.declineReason)+'</div>';
+  }else{
+    h += rvHead('ชื่อที่จะปรากฏบนประกาศนียบัตร');
+    h += '<div class="rv-cert">'+esc(p.prefix)+esc(p.firstNameTh)+' '+esc(p.lastNameTh)+
+         '<span>'+esc(p.firstNameEn)+' '+esc(p.lastNameEn)+'</span></div>';
+    h += '<div class="hint" style="margin:-.3rem 0 .9rem">สะกดตามนี้ทุกตัวอักษร โปรดตรวจให้แน่ใจ</div>';
+
+    h += rvHead('ตำแหน่งและหน่วยงาน');
+    h += row('ตำแหน่ง', p.position) + row('ประเภทการจ้าง', p.empType) + row('ระดับ', p.level) +
+         row('หน่วยบริการ', p.facility) + row('อำเภอ', p.district);
+
+    h += rvHead('ช่องทางติดต่อ');
+    h += row('โทรศัพท์', p.phone) + row('อีเมล', p.email) + row('ไลน์ไอดี', p.lineId);
+    h += '<div class="hint" style="margin:-.3rem 0 .9rem">อีเมลยืนยันจะถูกส่งไปที่อีเมลนี้</div>';
+
+    if(p.roomType){
+      h += rvHead('ที่พักและอาหาร');
+      h += row('ที่พัก', p.roomType) + row('คู่พัก', p.mateCode) + row('อาหาร', p.food);
+    }else{
+      h += rvHead('อาหาร') + row('อาหาร', p.food);
+    }
+
+    h += rvHead('ทำเนียบรุ่น');
+    h += '<div class="rv-photo">'+
+         (p.photoData
+           ? '<img src="'+p.photoData+'" alt="รูปถ่ายที่เลือกไว้">'
+           : '<div class="rv-nophoto">ใช้รูปเดิมที่เคยส่งไว้<br>'+
+             '<a href="'+p.keepPhoto+'" target="_blank" rel="noopener">เปิดดูรูป</a></div>')+
+         '<div>'+row('ชื่อเล่น', p.nickname)+
+         '<div class="rv-row"><div class="rv-k">สิ่งที่อยากได้จากการอบรม</div>'+
+         '<div class="rv-v">'+esc(p.wish)+'</div></div></div></div>';
+
+    h += rvHead('ผู้ติดต่อกรณีฉุกเฉิน');
+    h += row('ชื่อ–นามสกุล', p.emgName) + row('ความสัมพันธ์', p.emgRelation) + row('เบอร์โทรศัพท์', p.emgPhone);
+  }
+
+  $('reviewBody').innerHTML=h;
+  $('subBtn3').textContent = p.decision==='สละสิทธิ์' ? 'ยืนยันการสละสิทธิ์' : 'ยืนยันและส่งข้อมูล';
+  show('s-review');
+}
+
+function backToForm(){ show('s-form'); }
+
+function sendPayload(){
+  if(!PENDING) return showErr('ไม่พบข้อมูลที่จะส่ง กรุณากดแก้ไขข้อมูลแล้วลองใหม่');
+  var btn=$('subBtn3'), label=btn.textContent;
   btn.disabled=true; btn.textContent='กำลังส่ง…';
 
-  post(payload, function(res){
+  post(PENDING, function(res){
     btn.disabled=false; btn.textContent=label;
     if(!res.ok) return showErr(res.error||'ส่งข้อมูลไม่สำเร็จ');
     var r=ME.run;
@@ -592,10 +704,18 @@ function submitAll(){
         '<br><br>แก้ไขข้อมูลได้จนถึง '+esc(r.closeText)+' โดยกรอกเลขที่การสมัครและอีเมลหรือเบอร์โทรศัพท์เดิมอีกครั้ง</div>'+
         ((res.line||r.line)?
           '<div class="note"><b>ขั้นตอนต่อไป เข้ากลุ่มไลน์ของรุ่น</b>'+
-          'ใช้แจ้งกำหนดการ เอกสาร และประสานงานก่อนและระหว่างการอบรม<br>'+
-          '<a href="'+(res.line||r.line)+'" target="_blank" rel="noopener">'+
-          'เข้ากลุ่ม '+esc(r.label)+' ทันตกรรมป้องกันระดับปฐมภูมิ</a>'+
-          '<br><br>ลิงก์นี้อยู่ในอีเมลยืนยันที่ส่งไปให้ท่านด้วย</div>':'');
+          'ใช้แจ้งกำหนดการ เอกสาร และประสานงานก่อนและระหว่างการอบรม'+
+          '<ol style="margin:10px 0 10px 18px;padding:0">'+
+          '<li style="margin-bottom:6px"><a href="'+(res.line||r.line)+'" target="_blank" rel="noopener">'+
+          'กดเข้ากลุ่ม '+esc(r.label)+' ทันตกรรมป้องกันระดับปฐมภูมิ</a> แล้วกดเข้าร่วม</li>'+
+          '<li style="margin-bottom:6px">ตั้งชื่อที่ใช้ในกลุ่มเป็น <b>เลขที่การสมัคร เว้นวรรค ชื่อภาษาอังกฤษ</b>'+
+          (res.lineName?'<br>ของท่านคือ <b class="mono">'+esc(res.lineName)+'</b>':'')+'</li>'+
+          '<li>ชื่อที่ตั้งนี้ใช้เฉพาะในกลุ่ม ไม่กระทบชื่อไลน์ปกติของท่าน</li>'+
+          '</ol>'+
+          'ลิงก์และวิธีตั้งชื่ออยู่ในอีเมลยืนยันที่ส่งไปให้ท่านด้วย</div>':'')+
+        ((res.prepare&&res.prepare.length)?
+          '<div class="note"><b>สิ่งที่ต้องเตรียม</b>'+
+          res.prepare.map(esc).join(' · ')+'</div>':'');
     }
     show('s-done');
   });
@@ -606,6 +726,15 @@ function submitAll(){
   $('contact').textContent=CONTACT;
   $('gCode').addEventListener('keydown',function(e){ if(e.key==='Enter') $('gVerify').focus(); });
   $('gVerify').addEventListener('keydown',function(e){ if(e.key==='Enter') doLookup(); });
+
+  /* ชื่อภาษาอังกฤษบนประกาศนียบัตร ขึ้นต้นด้วยตัวใหญ่ให้อัตโนมัติ */
+  ['firstNameEn','lastNameEn'].forEach(function(id){
+    var el=$(id); if(!el) return;
+    el.addEventListener('blur',function(){
+      el.value = el.value.trim().toLowerCase().replace(/(^|[\s'-])([a-z])/g,
+        function(m,sep,ch){ return sep+ch.toUpperCase(); });
+    });
+  });
 })();
 </script>
 </body>
