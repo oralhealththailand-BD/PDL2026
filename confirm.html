@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ยืนยันสิทธิ์เข้ารับการอบรม — ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1c33; --navy-2:#12305c; --blue:#1c4fd8; --blue-dk:#1740ae; --blue-lt:#4a7cf0;
+  --tint:#eef3fd; --tint-2:#dde7fb;
+  --silver:#e6eaf1; --silver-2:#ccd4e0; --steel:#f4f6fa;
+  --line:#e0e5ee; --line-2:#cfd7e4;
+  --ink:#0d1b2e; --muted:#5a6779;
+  --info-bg:#f3f7fe; --info-line:#1c4fd8;
+  --warn:#a86a12; --warn-bg:#fdf5e6; --warn-line:#a86a12;
+  --danger:#b42318; --danger-bg:#fdf1f0;
+  --ok:#1a7f52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'IBM Plex Sans Thai','Segoe UI',Tahoma,sans-serif;background:var(--steel);
+  color:var(--ink);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+
+.masthead{background:linear-gradient(158deg,var(--navy) 0%,#102a52 58%,var(--navy-2) 100%);
+  color:#fff;padding:2rem 1.25rem 1.8rem;position:relative;overflow:hidden}
+.masthead::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 46px);pointer-events:none}
+.masthead::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--silver-2) 22%,#fff 50%,var(--silver-2) 78%,transparent);opacity:.75}
+.masthead .in{max-width:680px;margin:0 auto;position:relative}
+.masthead .org{font-size:.78rem;color:#9fb6dd;margin-bottom:.6rem;font-weight:500}
+.masthead h1{font-size:1.45rem;font-weight:600;line-height:1.35;letter-spacing:-.015em}
+@media(min-width:560px){.masthead h1{font-size:1.75rem}}
+.masthead .sub{font-size:.88rem;color:#b9c9e4;margin-top:.7rem;padding-top:.7rem;
+  border-top:1px solid rgba(255,255,255,.14)}
+
+main{max-width:680px;margin:0 auto;padding:1.6rem 1.25rem 4rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.6rem 1.35rem;
+  box-shadow:0 1px 2px rgba(13,27,46,.04),0 12px 32px -18px rgba(13,27,46,.22)}
+@media(min-width:560px){.card{padding:2.1rem 2rem}}
+
+h2{font-size:1.2rem;font-weight:600;margin-bottom:.4rem;letter-spacing:-.01em}
+h3{font-size:1rem;font-weight:600;margin:1.9rem 0 .9rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+h3:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.lede{color:var(--muted);font-size:.94rem;margin-bottom:1.5rem}
+p+p{margin-top:.85rem}
+
+.field{margin-bottom:1.35rem}
+label.q{display:block;font-weight:600;margin-bottom:.15rem}
+.hint{font-size:.85rem;color:var(--muted);margin-bottom:.55rem}
+.req{color:var(--danger);font-weight:400}
+
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  width:100%;font:inherit;font-size:1rem;color:var(--ink);background:#fff;
+  border:1.5px solid var(--line-2);border-radius:10px;padding:.72rem .9rem;
+  transition:border-color .15s,box-shadow .15s}
+textarea{resize:vertical;min-height:5rem;line-height:1.6}
+input::placeholder,textarea::placeholder{color:#9aa5b5}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,79,216,.14)}
+select{appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%235a6779' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .95rem center;background-size:12px;padding-right:2.5rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media(max-width:420px){.two{grid-template-columns:1fr}}
+
+.opts{display:flex;flex-direction:column;gap:.55rem}
+.opt{display:flex;align-items:flex-start;gap:.75rem;border:1.5px solid var(--line-2);
+  border-radius:11px;padding:.75rem .9rem;cursor:pointer;background:#fff;
+  transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--blue-lt);background:#fafbfe}
+.opt input{margin:.4rem 0 0;accent-color:var(--blue);width:18px;height:18px;flex:none}
+.opt span{font-size:.97rem}
+.opt small{display:block;color:var(--muted);font-size:.85rem;line-height:1.5;margin-top:.1rem}
+.opt.sel{border-color:var(--blue);background:var(--tint);box-shadow:inset 0 0 0 1px var(--blue)}
+
+.note{border-left:3px solid var(--info-line);background:var(--info-bg);padding:.9rem 1.05rem;
+  border-radius:0 10px 10px 0;font-size:.92rem;margin:1.2rem 0}
+.note b{display:block;margin-bottom:.2rem;color:var(--navy)}
+.note.warn{border-left-color:var(--warn-line);background:var(--warn-bg)}
+.note.danger{border-left-color:var(--danger);background:var(--danger-bg)}
+.note.danger b{color:#8c1c14}
+.note.warn b{color:#7a4c08}
+.note ul{margin:.4rem 0 0 1.1rem}
+.note li{margin:.15rem 0}
+
+.who{background:linear-gradient(180deg,#fff,var(--tint));border:1px solid var(--tint-2);
+  border-radius:12px;padding:1rem 1.1rem;font-size:.93rem;margin-bottom:1.4rem}
+.who dt{color:var(--muted);font-size:.82rem;font-weight:500}
+.who dd{font-weight:600;margin-bottom:.55rem;color:var(--navy)}
+.who dd:last-child{margin-bottom:0}
+
+.err{background:var(--danger-bg);color:var(--danger);border:1px solid #f3cfcb;border-radius:10px;
+  padding:.7rem .9rem;font-size:.92rem;margin-bottom:1.2rem;display:none}
+.err.show{display:block}
+
+.nav{display:flex;gap:.75rem;margin-top:1.9rem}
+button{font:inherit;font-weight:600;border-radius:11px;cursor:pointer;padding:.82rem 1.4rem;
+  border:1.5px solid transparent;transition:background .15s,border-color .15s}
+button:focus-visible{outline:3px solid rgba(28,79,216,.4);outline-offset:2px}
+.go{background:var(--blue);color:#fff;flex:1;box-shadow:0 1px 2px rgba(23,64,174,.3)}
+.go:hover{background:var(--blue-dk)}
+.go:disabled{background:var(--silver-2);color:#fff;box-shadow:none;cursor:wait}
+.back{background:#fff;color:var(--muted);border-color:var(--line-2)}
+.back:hover{border-color:var(--blue-lt);color:var(--navy)}
+
+.photo-row{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+#photoPrev{width:120px;height:150px;object-fit:cover;border-radius:10px;border:1.5px solid var(--line-2);
+  background:var(--silver);display:none}
+#photoPrev.show{display:block}
+.filebtn{display:inline-block;background:#fff;border:1.5px solid var(--line-2);border-radius:10px;
+  padding:.65rem 1.1rem;font-weight:600;font-size:.92rem;cursor:pointer;color:var(--navy)}
+.filebtn:hover{border-color:var(--blue-lt)}
+#photoFile{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.photo-note{flex:1;min-width:200px;font-size:.85rem;color:var(--muted)}
+
+.tick{width:54px;height:54px;border-radius:50%;background:var(--tint);border:1px solid var(--tint-2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.tick svg{width:26px;height:26px}
+.done-code{font-size:1.6rem;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums}
+
+footer{max-width:680px;margin:0 auto;padding:0 1.25rem 3rem;color:var(--muted);font-size:.85rem}
+a{color:var(--blue)}
+.hide{display:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="in">
+    <div class="org">สำนักทันตสาธารณสุข กรมอนามัย กระทรวงสาธารณสุข</div>
+    <h1>ยืนยันสิทธิ์เข้ารับการอบรม<br>ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</h1>
+    <div class="sub">สำหรับผู้ที่มีรายชื่อในประกาศผู้มีสิทธิ์เข้ารับการอบรมเท่านั้น</div>
+  </div>
+</header>
+
+<main>
+<div class="card">
+  <div class="err" id="err" role="alert"></div>
+
+  <!-- ขั้น 1 ------------------------------------------------------ gate -->
+  <section id="s-gate">
+    <h2>เข้าสู่ระบบยืนยันสิทธิ์</h2>
+    <p class="lede">กรอกเลขที่การสมัคร และอีเมลหรือเบอร์โทรศัพท์ที่เคยลงทะเบียนไว้ ระบบจะดึงข้อมูลเดิมขึ้นมาให้ตรวจสอบ</p>
+
+    <div class="field">
+      <label class="q" for="gCode">เลขที่การสมัคร <span class="req">*</span></label>
+      <div class="hint">อยู่ในอีเมลยืนยันที่ได้รับตอนแสดงความประสงค์ เช่น PDL69-1-007</div>
+      <input type="text" id="gCode" placeholder="PDL69-1-007" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label class="q" for="gVerify">อีเมลหรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้ <span class="req">*</span></label>
+      <div class="hint">กรอกอย่างใดอย่างหนึ่งที่ใช้ตอนแสดงความประสงค์ ใช้ยืนยันตัวตนเท่านั้น</div>
+      <input type="text" id="gVerify" placeholder="somchai@gmail.com หรือ 0812345678" autocomplete="off">
+    </div>
+
+    <div class="nav"><button class="go" id="gBtn" onclick="doLookup()">ดึงข้อมูลของฉัน</button></div>
+  </section>
+
+  <!-- ขั้น 2 ------------------------------------------------------ form -->
+  <section id="s-form" class="hide">
+    <h2>ตรวจสอบข้อมูลและยืนยัน</h2>
+    <p class="lede" id="formLede"></p>
+
+    <dl class="who" id="who"></dl>
+
+    <div class="field">
+      <label class="q">การตัดสินใจ <span class="req">*</span></label>
+      <div class="opts" data-name="decision">
+        <label class="opt"><input type="radio" name="decision" value="ยืนยันเข้าร่วม" onchange="toggleDecision()"><span>ยืนยันเข้าร่วมการอบรม</span></label>
+        <label class="opt"><input type="radio" name="decision" value="สละสิทธิ์" onchange="toggleDecision()"><span>ขอสละสิทธิ์<small>เพื่อให้สำนักฯ จัดสรรที่นั่งให้ผู้อื่นได้ทันเวลา</small></span></label>
+      </div>
+    </div>
+
+    <!-- สละสิทธิ์ -->
+    <div id="blkDecline" class="hide">
+      <div id="declineWarn"></div>
+      <div class="field">
+        <label class="q" for="declineReason">เหตุผล <span class="req">*</span></label>
+        <div class="hint">ระบุสั้น ๆ เช่น ติดราชการ ติดภารกิจส่วนตัว ปัญหาสุขภาพ</div>
+        <textarea id="declineReason" maxlength="300" placeholder="ระบุเหตุผลสั้น ๆ"></textarea>
+      </div>
+      <div class="nav">
+        <button class="back" onclick="backToGate()">ย้อนกลับ</button>
+        <button class="go" id="subBtn1" onclick="submitAll()">ส่งการสละสิทธิ์</button>
+      </div>
+    </div>
+
+    <!-- ยืนยัน -->
+    <div id="blkConfirm" class="hide">
+
+      <h3>ชื่อที่จะพิมพ์บนใบประกาศนียบัตร</h3>
+      <div class="note"><b>ตรวจให้ถูกต้อง</b>ใบประกาศจะพิมพ์ตามข้อมูลนี้ และแก้ไขภายหลังไม่ได้</div>
+      <div class="field">
+        <label class="q">คำนำหน้า</label>
+        <div class="opts" data-name="prefix" style="flex-direction:row;flex-wrap:wrap">
+          <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นาย"><span>นาย</span></label>
+          <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นาง"><span>นาง</span></label>
+          <label class="opt" style="flex:1;min-width:6rem"><input type="radio" name="prefix" value="นางสาว"><span>นางสาว</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="q">ชื่อ–นามสกุล ภาษาไทย <span class="req">*</span></label>
+        <div class="two"><input type="text" id="firstNameTh" placeholder="ชื่อ"><input type="text" id="lastNameTh" placeholder="นามสกุล"></div>
+      </div>
+      <div class="field">
+        <label class="q">ชื่อ–นามสกุล ภาษาอังกฤษ <span class="req">*</span></label>
+        <div class="two"><input type="text" id="firstNameEn" placeholder="First name"><input type="text" id="lastNameEn" placeholder="Last name"></div>
+      </div>
+
+      <h3>ตำแหน่งและหน่วยงาน</h3>
+      <div class="field"><label class="q" for="position">ตำแหน่ง</label><input type="text" id="position"></div>
+      <div class="two">
+        <div class="field"><label class="q" for="empType">ประเภทการจ้าง</label><input type="text" id="empType"></div>
+        <div class="field"><label class="q" for="level">ระดับ</label><input type="text" id="level"></div>
+      </div>
+      <div class="field"><label class="q" for="facility">ชื่อหน่วยบริการ <span class="req">*</span></label><input type="text" id="facility"></div>
+      <div class="field"><label class="q" for="district">อำเภอ <span class="req">*</span></label><input type="text" id="district"></div>
+
+      <h3>การติดต่อ</h3>
+      <div class="field"><label class="q" for="phone">โทรศัพท์มือถือ <span class="req">*</span></label>
+        <input type="tel" id="phone" inputmode="numeric" maxlength="10"></div>
+      <div class="field"><label class="q" for="email">อีเมล <span class="req">*</span></label>
+        <div class="hint">ใช้ส่งหนังสือเชิญและกำหนดการ</div>
+        <input type="email" id="email"></div>
+      <div class="field"><label class="q" for="lineId">Line ID</label><input type="text" id="lineId"></div>
+
+      <h3>สิทธิ์ที่ได้รับ</h3>
+      <div id="benefitBox"></div>
+      <div class="field">
+        <div class="opts">
+          <label class="opt"><input type="checkbox" id="ackBenefit"><span id="ackBenefitText">ข้าพเจ้ารับทราบเงื่อนไขการสนับสนุนค่าใช้จ่ายข้างต้นแล้ว</span></label>
+        </div>
+      </div>
+
+      <h3>ที่พักและอาหาร</h3>
+      <div id="stayBox"></div>
+      <div class="field" id="roomField">
+        <label class="q">ความประสงค์เรื่องที่พัก <span class="req">*</span></label>
+        <div class="opts" data-name="roomType">
+          <label class="opt"><input type="radio" name="roomType" value="ระบุคู่พัก" onchange="toggleRoom()"><span>ขอจับคู่กับผู้เข้าอบรมที่ระบุ<small>ต้องเป็นเพศเดียวกัน รุ่นเดียวกัน และสังกัดกระทรวงสาธารณสุข</small></span></label>
+          <label class="opt"><input type="radio" name="roomType" value="ให้ผู้จัดจับคู่" onchange="toggleRoom()"><span>ให้ผู้จัดจับคู่ให้<small>จัดตามเพศ และพยายามให้อยู่เขตสุขภาพเดียวกัน</small></span></label>
+          <label class="opt"><input type="radio" name="roomType" value="พักเดี่ยว (ชำระเองทั้งหมด)" onchange="toggleRoom()"><span>ขอพักเดี่ยว<small>ผู้เข้าอบรมชำระค่าห้องเองทั้งหมด</small></span></label>
+          <label class="opt"><input type="radio" name="roomType" value="ไม่ใช้ที่พัก" onchange="toggleRoom()"><span>ไม่ใช้ที่พักที่จัดให้<small>เดินทางไป-กลับ หรือจัดหาที่พักเอง</small></span></label>
+        </div>
+        <div id="mateWrap" class="hide" style="margin-top:.6rem">
+          <div class="hint">กรอก<b>เลขที่การสมัคร</b>ของผู้ที่ต้องการพักร่วมห้อง ไม่ใช่ชื่อ เพื่อให้ระบบตรวจสอบได้ถูกคน</div>
+          <input type="text" id="mateCode" placeholder="PDL69-1-012" autocomplete="off">
+          <div class="hint" style="margin-top:.45rem">หากอีกฝ่ายระบุเลขที่ของท่านกลับมาตรงกัน ระบบจะถือว่าจับคู่สมบูรณ์ หากคู่ที่ระบุสละสิทธิ์หรือไม่ยืนยันภายในกำหนด ผู้จัดจะจับคู่ใหม่ให้</div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="q">อาหาร <span class="req">*</span></label>
+        <div class="opts" data-name="food">
+          <label class="opt"><input type="radio" name="food" value="ปกติ"><span>ปกติ</span></label>
+          <label class="opt"><input type="radio" name="food" value="อิสลาม/ฮาลาล"><span>อิสลาม หรือ ฮาลาล</span></label>
+          <label class="opt"><input type="radio" name="food" value="มังสวิรัติ/เจ"><span>มังสวิรัติ หรือ เจ</span></label>
+          <label class="opt"><input type="radio" name="food" value="อื่น" onchange="toggleFood()"><span>อื่น ๆ</span></label>
+        </div>
+        <input type="text" id="foodOther" class="hide" style="margin-top:.5rem" placeholder="ระบุความต้องการด้านอาหาร">
+      </div>
+
+      <h3>ข้อมูลสำหรับทำเนียบรุ่น</h3>
+      <div class="field">
+        <label class="q">รูปถ่ายหน้าตรง <span class="req">*</span></label>
+        <div class="hint">ครึ่งตัว พื้นหลังเรียบ ไม่สวมหมวกหรือแว่นกันแดด ใช้ทำทำเนียบรุ่นและป้ายชื่อ</div>
+        <div class="photo-row">
+          <img id="photoPrev" alt="ตัวอย่างรูปที่เลือก">
+          <div>
+            <label class="filebtn" for="photoFile">เลือกรูปถ่าย</label>
+            <input type="file" id="photoFile" accept="image/*" onchange="pickPhoto(event)">
+          </div>
+          <div class="photo-note" id="photoNote">ระบบจะย่อขนาดรูปให้อัตโนมัติ ถ่ายจากมือถือได้เลย</div>
+        </div>
+      </div>
+      <div class="field"><label class="q" for="nickname">ชื่อเล่น <span class="req">*</span></label>
+        <input type="text" id="nickname" maxlength="30"></div>
+      <div class="field"><label class="q" for="wish">สิ่งที่อยากได้จากการอบรม <span class="req">*</span></label>
+        <div class="hint">ไม่เกิน 100 ตัวอักษร <span id="wishCount">0/100</span></div>
+        <textarea id="wish" maxlength="100" oninput="countWish()" placeholder="เช่น อยากได้แนวทางคัดกรองผู้สูงอายุที่ทำได้จริงใน รพ.สต."></textarea></div>
+      <div class="field">
+        <div class="opts">
+          <label class="opt"><input type="checkbox" id="ackPhoto"><span>ข้าพเจ้ายินยอมให้สำนักทันตสาธารณสุขใช้ภาพถ่ายและข้อมูลข้างต้น เพื่อจัดทำทำเนียบรุ่น ป้ายชื่อ และการประชาสัมพันธ์ที่เกี่ยวข้องกับการอบรม ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล</span></label>
+        </div>
+      </div>
+
+      <h3>ผู้ติดต่อกรณีฉุกเฉิน</h3>
+      <div class="hint" style="margin-bottom:.9rem">การอบรมเป็นแบบค้างคืน 3 วัน จึงขอข้อมูลไว้ใช้เฉพาะกรณีจำเป็น</div>
+      <div class="two">
+        <div class="field"><label class="q" for="emgName">ชื่อ–นามสกุล <span class="req">*</span></label><input type="text" id="emgName"></div>
+        <div class="field"><label class="q" for="emgRelation">ความสัมพันธ์</label><input type="text" id="emgRelation" placeholder="เช่น คู่สมรส บิดา มารดา"></div>
+      </div>
+      <div class="field"><label class="q" for="emgPhone">เบอร์โทรศัพท์ <span class="req">*</span></label>
+        <input type="tel" id="emgPhone" inputmode="numeric" maxlength="10" placeholder="0812345678"></div>
+
+      <div class="nav">
+        <button class="back" onclick="backToGate()">ย้อนกลับ</button>
+        <button class="go" id="subBtn2" onclick="submitAll()">ยืนยันเข้าร่วมการอบรม</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ขั้น 3 ------------------------------------------------------ done -->
+  <section id="s-done" class="hide">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#1c4fd8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
+    <h2 id="doneTitle"></h2>
+    <p class="lede" id="doneLede"></p>
+    <div class="done-code" id="doneCode"></div>
+    <div id="doneBody"></div>
+    <div class="nav"><button class="back" onclick="location.reload()">ปิดหน้านี้</button></div>
+  </section>
+</div>
+</main>
+
+<footer>สอบถามเพิ่มเติม <span id="contact"></span> · สำนักทันตสาธารณสุข กรมอนามัย</footer>
+
+<script>
+/* ============================ ตั้งค่า ============================ */
+var API = 'https://script.google.com/macros/s/AKfycbwPBlO9PrYNpMofFnwGE97JcHi2P87-UAf6-wI5IqvHOO72avFtef6mBatx6J1JEznqaw/exec';
+var CONTACT = 'กลุ่มพัฒนาระบบทันตสาธารณสุข โทร 02-590-4213';
+
+/* ============================ สถานะ ============================ */
+var ME = null;          // ข้อมูลที่ดึงมาจากระบบ
+var PHOTO = '';         // dataURL ของรูปใหม่
+var KEEP_PHOTO = '';    // ลิงก์รูปเดิม ถ้าเคยส่งไว้แล้ว
+var AUTH = '';          // อีเมลหรือเบอร์ที่ใช้ยืนยันตัวตนตอนเข้าระบบ
+
+function $(id){ return document.getElementById(id); }
+function val(id){ var el=$(id); return el ? el.value.trim() : ''; }
+function radio(n){ var el=document.querySelector('input[name="'+n+'"]:checked'); return el?el.value:''; }
+function setRadio(n,v){
+  var el=document.querySelector('input[name="'+n+'"][value="'+v+'"]');
+  if(el){ el.checked=true; el.dispatchEvent(new Event('change',{bubbles:true})); }
+}
+function esc(s){ var d=document.createElement('div'); d.textContent=s==null?'':s; return d.innerHTML; }
+function showErr(m){ var e=$('err'); e.textContent=m; e.classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+function clearErr(){ $('err').classList.remove('show'); }
+function show(id){ ['s-gate','s-form','s-done'].forEach(function(s){ $(s).classList.add('hide'); });
+  $(id).classList.remove('hide'); clearErr(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+document.addEventListener('change', function(e){
+  if(e.target.type==='radio'){
+    var box=e.target.closest('.opts');
+    if(box) box.querySelectorAll('.opt').forEach(function(o){ o.classList.toggle('sel', o.querySelector('input').checked); });
+  }
+  if(e.target.type==='checkbox'){
+    var l=e.target.closest('.opt'); if(l) l.classList.toggle('sel', e.target.checked);
+  }
+});
+
+function post(payload, cb){
+  fetch(API,{ method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) })
+    .then(function(r){ return r.text(); })
+    .then(function(t){
+      var res; try{ res=JSON.parse(t); }
+      catch(e){ cb({ok:false,error:'เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง โปรดลองใหม่อีกครั้ง'}); return; }
+      cb(res);
+    })
+    .catch(function(){ cb({ok:false,error:'เชื่อมต่อไม่สำเร็จ โปรดตรวจสอบอินเทอร์เน็ตแล้วลองใหม่'}); });
+}
+
+/* ============================ ขั้น 1 ============================ */
+function doLookup(){
+  clearErr();
+  var code=val('gCode'), verify=val('gVerify');
+  if(!code)   return showErr('กรุณากรอกเลขที่การสมัคร');
+  if(!verify) return showErr('กรุณากรอกอีเมลหรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้');
+
+  var b=$('gBtn'); b.disabled=true; b.textContent='กำลังตรวจสอบ…';
+  post({action:'lookup', code:code, verify:verify}, function(res){
+    b.disabled=false; b.textContent='ดึงข้อมูลของฉัน';
+    if(!res.ok){
+      if(res.notEligible) return showThanks(res.error);
+      return showErr(res.error||'ตรวจสอบไม่สำเร็จ');
+    }
+    AUTH=verify; ME=res; fillForm(res); show('s-form');
+  });
+}
+function backToGate(){ show('s-gate'); }
+
+/** ข้อความสำหรับผู้ที่ไม่ได้รับการจัดสรรที่นั่ง — แสดงเป็นหน้าสุภาพ ไม่ใช่กล่องผิดพลาด */
+function showThanks(msg){
+  $('doneTitle').textContent='ขอขอบคุณที่ให้ความสนใจ';
+  $('doneLede').textContent='';
+  $('doneCode').textContent='';
+  $('doneBody').innerHTML='<div class="note" style="margin-top:0">'+esc(msg)+'</div>';
+  show('s-done');
+}
+
+/* ============================ ขั้น 2 ============================ */
+function fillForm(res){
+  var d=res.data, r=res.run;
+
+  $('formLede').textContent = 'กรุณาตรวจสอบและแก้ไขข้อมูลให้เป็นปัจจุบัน แล้วเลือกยืนยันหรือสละสิทธิ์ ภายใน '+r.closeText;
+
+  $('who').innerHTML =
+    '<dt>เลขที่การสมัคร</dt><dd>'+esc(res.code)+'</dd>'+
+    '<dt>รุ่นที่ได้รับจัดสรร</dt><dd>'+esc(r.label)+'</dd>'+
+    '<dt>วันอบรม</dt><dd>'+esc(r.date)+'</dd>'+
+    '<dt>สถานที่</dt><dd>'+esc(r.hotel||r.place)+' '+esc(r.city)+
+      (r.map?' · <a href="'+r.map+'" target="_blank" rel="noopener">เปิดแผนที่</a>':'')+'</dd>'+
+    '<dt>สังกัด</dt><dd>'+esc(d.affiliation)+'</dd>'+
+    '<dt>พื้นที่</dt><dd>เขต '+esc(d.zone)+' — '+esc(d.province)+'</dd>';
+
+  setRadio('prefix', d.prefix);
+  $('firstNameTh').value=d.firstNameTh; $('lastNameTh').value=d.lastNameTh;
+  $('firstNameEn').value=d.firstNameEn; $('lastNameEn').value=d.lastNameEn;
+  $('position').value=d.position; $('empType').value=d.empType; $('level').value=d.level;
+  $('facility').value=d.facility;  $('district').value=d.district;
+  $('phone').value=d.phone; $('email').value=d.email; $('lineId').value=d.lineId;
+  if(d.food) setRadio('food', d.food);
+
+  /* สิทธิ์ที่ได้รับ */
+  if(d.isMoph){
+    $('benefitBox').innerHTML =
+      '<div class="note"><b>สำนักทันตสาธารณสุขสนับสนุนให้ผู้เข้าอบรมสังกัดกระทรวงสาธารณสุข</b>'+
+      '<ul><li>ค่าที่พัก 2 คืน ('+esc(r.nights)+') แบบพักคู่</li>'+
+      '<li>อาหารกลางวัน อาหารค่ำ อาหารว่างและเครื่องดื่ม ตลอดการอบรม</li></ul>'+
+      '<br><b>สิ่งที่ไม่ครอบคลุม</b>ค่าเดินทาง และค่าที่พักคืนอื่นนอกเหนือจากที่ระบุ '+
+      'หากจำเป็นต้องเดินทางมาก่อนหรือกลับภายหลัง ให้เบิกจากต้นสังกัด</div>'+
+      '<div class="note danger"><b>เงื่อนไขการสละสิทธิ์</b>'+
+      'สำนักฯ สำรองห้องพักกับโรงแรมตามจำนวนผู้ยืนยันสิทธิ์ '+
+      'หากสละสิทธิ์<b style="display:inline">หลังวันที่ '+esc(r.cancelFeeText)+'</b> '+
+      'ผู้เข้าอบรมต้องรับผิดชอบค่าที่พักที่สำรองไว้แล้วด้วยตนเอง</div>';
+    $('ackBenefitText').textContent='ข้าพเจ้ารับทราบขอบเขตการสนับสนุนค่าใช้จ่าย ส่วนที่ต้องเบิกจากต้นสังกัด '+
+      'และเงื่อนไขว่าหากสละสิทธิ์หลังวันที่ '+r.cancelFeeText+' ข้าพเจ้าต้องรับผิดชอบค่าที่พักด้วยตนเอง';
+  }else{
+    $('benefitBox').innerHTML =
+      '<div class="note warn"><b>ผู้เข้าอบรมที่ไม่ได้สังกัดกระทรวงสาธารณสุข</b>'+
+      'กรุณาจองและชำระค่าที่พักด้วยตนเอง รวมถึงค่าเดินทาง โดยเบิกจากต้นสังกัด<br>'+
+      'สำนักฯ สนับสนุนอาหารกลางวัน อาหารว่างและเครื่องดื่มระหว่างการอบรมให้ผู้เข้าอบรมทุกท่าน'+
+      (r.booking?'<br><br><b>ติดต่อจองห้องพักกับโรงแรม</b>'+esc(r.booking):'')+'</div>';
+    $('ackBenefitText').textContent='ข้าพเจ้ารับทราบว่าต้องรับผิดชอบค่าที่พักและค่าเดินทางด้วยตนเอง';
+  }
+
+  /* ที่พัก */
+  if(d.isMoph){
+    $('stayBox').innerHTML='';
+    $('roomField').classList.remove('hide');
+  }else{
+    $('stayBox').innerHTML =
+      '<div class="note"><b>ที่พัก</b>ผู้เข้าอบรมจองที่พักเอง จึงไม่ต้องเลือกคู่พักในระบบนี้<br>'+
+      'สถานที่จัดอบรม '+esc(r.hotel||r.place)+' '+esc(r.city)+
+      (r.booking?'<br>ติดต่อจองห้องพัก '+esc(r.booking):'')+'</div>';
+    $('roomField').classList.add('hide');
+  }
+
+  /* เคยยืนยันไว้แล้ว */
+  var p=res.previous;
+  if(p){
+    $('formLede').textContent='ท่านเคยส่งข้อมูลไว้แล้วเมื่อก่อนหน้านี้ สามารถแก้ไขแล้วส่งใหม่ได้จนถึง '+r.closeText;
+    setRadio('decision', p['สถานะ']==='สละสิทธิ์' ? 'สละสิทธิ์' : 'ยืนยันเข้าร่วม');
+    if(p['เหตุผลที่สละสิทธิ์']) $('declineReason').value=p['เหตุผลที่สละสิทธิ์'];
+    if(p['ที่พัก']) setRadio('roomType', p['ที่พัก']);
+    if(p['คู่พัก (เลขที่)']) $('mateCode').value=p['คู่พัก (เลขที่)'];
+    if(p['ชื่อเล่น']) $('nickname').value=p['ชื่อเล่น'];
+    if(p['สิ่งที่อยากได้จากการอบรม']) $('wish').value=p['สิ่งที่อยากได้จากการอบรม'];
+    if(p['ผู้ติดต่อฉุกเฉิน']) $('emgName').value=p['ผู้ติดต่อฉุกเฉิน'];
+    if(p['ความสัมพันธ์']) $('emgRelation').value=p['ความสัมพันธ์'];
+    if(p['เบอร์ฉุกเฉิน']) $('emgPhone').value=String(p['เบอร์ฉุกเฉิน']).replace(/[^0-9]/g,'');
+    if(p['ลิงก์รูป']){
+      KEEP_PHOTO=p['ลิงก์รูป'];
+      $('photoNote').innerHTML='มีรูปที่เคยส่งไว้แล้ว <a href="'+KEEP_PHOTO+'" target="_blank" rel="noopener">เปิดดู</a> — เลือกรูปใหม่เพื่อแทนที่';
+    }
+    if(p['ยินยอมใช้ภาพ']) $('ackPhoto').checked=true;
+    $('ackBenefit').checked=true;
+    toggleDecision(); toggleRoom(); countWish();
+  }
+}
+
+function toggleDecision(){
+  var dec=radio('decision');
+  if(dec==='สละสิทธิ์' && ME && ME.data.isMoph){
+    $('declineWarn').innerHTML='<div class="note danger"><b>โปรดอ่านก่อนสละสิทธิ์</b>'+
+      'หากท่านเคยยืนยันสิทธิ์ไว้แล้ว และสละสิทธิ์หลังวันที่ '+esc(ME.run.cancelFeeText)+' '+
+      'ท่านต้องรับผิดชอบค่าที่พักที่สำนักฯ สำรองไว้แล้วด้วยตนเอง</div>';
+  }else{
+    $('declineWarn').innerHTML='';
+  }
+  $('blkConfirm').classList.toggle('hide', dec!=='ยืนยันเข้าร่วม');
+  $('blkDecline').classList.toggle('hide', dec!=='สละสิทธิ์');
+}
+function toggleRoom(){ $('mateWrap').classList.toggle('hide', radio('roomType')!=='ระบุคู่พัก'); }
+function toggleFood(){ $('foodOther').classList.toggle('hide', radio('food')!=='อื่น'); }
+function countWish(){ $('wishCount').textContent=val('wish').length+'/100'; }
+
+/* ---- รูปถ่าย: ย่อขนาดในเบราว์เซอร์ก่อนส่ง ---- */
+function pickPhoto(ev){
+  var f=ev.target.files && ev.target.files[0];
+  if(!f) return;
+  if(f.size > 20*1024*1024) return showErr('ไฟล์ใหญ่เกิน 20 MB กรุณาเลือกรูปอื่น');
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var W=700, H=900;
+      var scale=Math.min(W/img.width, H/img.height, 1);
+      var w=Math.round(img.width*scale), h=Math.round(img.height*scale);
+      var c=document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      PHOTO=c.toDataURL('image/jpeg',0.82);
+      $('photoPrev').src=PHOTO; $('photoPrev').classList.add('show');
+      $('photoNote').textContent='เลือกรูปแล้ว ขนาดหลังย่อประมาณ '+Math.round(PHOTO.length/1365)+' KB';
+      clearErr();
+    };
+    img.onerror=function(){ showErr('อ่านไฟล์รูปไม่สำเร็จ กรุณาเลือกรูปอื่น'); };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(f);
+}
+
+/* ============================ ส่งข้อมูล ============================ */
+function submitAll(){
+  clearErr();
+  var dec=radio('decision');
+  if(!dec) return showErr('กรุณาเลือกว่าจะยืนยันเข้าร่วมหรือสละสิทธิ์');
+
+  var payload={ action:'confirm', code:ME.code, auth:AUTH, decision:dec };
+
+  if(dec==='สละสิทธิ์'){
+    if(!val('declineReason')) return showErr('กรุณาระบุเหตุผล');
+    payload.declineReason=val('declineReason');
+    payload.prefix=ME.data.prefix;
+    payload.firstNameTh=ME.data.firstNameTh; payload.lastNameTh=ME.data.lastNameTh;
+    payload.firstNameEn=ME.data.firstNameEn; payload.lastNameEn=ME.data.lastNameEn;
+    payload.sex=ME.data.sex; payload.position=ME.data.position;
+    payload.empType=ME.data.empType; payload.level=ME.data.level;
+    payload.facility=ME.data.facility; payload.district=ME.data.district;
+    payload.phone=ME.data.phone; payload.email=ME.data.email; payload.lineId=ME.data.lineId;
+  }else{
+    if(!val('firstNameTh')||!val('lastNameTh')) return showErr('กรุณากรอกชื่อและนามสกุลภาษาไทย');
+    if(!val('firstNameEn')||!val('lastNameEn')) return showErr('กรุณากรอกชื่อและนามสกุลภาษาอังกฤษ');
+    if(!val('facility')) return showErr('กรุณากรอกชื่อหน่วยบริการ');
+    if(!val('district')) return showErr('กรุณากรอกอำเภอ');
+    if(!/^0[0-9]{9}$/.test(val('phone').replace(/[^0-9]/g,''))) return showErr('เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('email'))) return showErr('รูปแบบอีเมลไม่ถูกต้อง');
+    if(!$('ackBenefit').checked) return showErr('กรุณาติ๊กรับทราบเงื่อนไขการสนับสนุนค่าใช้จ่าย');
+    if(ME.data.isMoph){
+      if(!radio('roomType')) return showErr('กรุณาเลือกความประสงค์เรื่องที่พัก');
+      if(radio('roomType')==='ระบุคู่พัก' && !val('mateCode')) return showErr('กรุณากรอกเลขที่การสมัครของคู่พัก');
+    }
+    if(!radio('food')) return showErr('กรุณาเลือกประเภทอาหาร');
+    if(radio('food')==='อื่น' && !val('foodOther')) return showErr('กรุณาระบุความต้องการด้านอาหาร');
+    if(!PHOTO && !KEEP_PHOTO) return showErr('กรุณาอัปโหลดรูปถ่ายหน้าตรง');
+    if(!val('nickname')) return showErr('กรุณากรอกชื่อเล่น');
+    if(!val('wish')) return showErr('กรุณากรอกสิ่งที่อยากได้จากการอบรม');
+    if(!$('ackPhoto').checked) return showErr('กรุณาติ๊กยินยอมให้ใช้ภาพถ่าย');
+    if(!val('emgName')) return showErr('กรุณากรอกชื่อผู้ติดต่อกรณีฉุกเฉิน');
+    if(!/^0[0-9]{9}$/.test(val('emgPhone').replace(/[^0-9]/g,''))) return showErr('เบอร์ผู้ติดต่อฉุกเฉินต้องเป็นตัวเลข 10 หลัก');
+
+    payload.prefix=radio('prefix')||ME.data.prefix;
+    payload.firstNameTh=val('firstNameTh'); payload.lastNameTh=val('lastNameTh');
+    payload.firstNameEn=val('firstNameEn'); payload.lastNameEn=val('lastNameEn');
+    payload.sex=ME.data.sex;
+    payload.position=val('position'); payload.empType=val('empType'); payload.level=val('level');
+    payload.facility=val('facility'); payload.district=val('district');
+    payload.phone=val('phone').replace(/[^0-9]/g,''); payload.email=val('email'); payload.lineId=val('lineId');
+    payload.roomType=ME.data.isMoph?radio('roomType'):'';
+    payload.mateCode=radio('roomType')==='ระบุคู่พัก'?val('mateCode'):'';
+    payload.food=radio('food')==='อื่น'?('อื่น: '+val('foodOther')):radio('food');
+    payload.nickname=val('nickname'); payload.wish=val('wish');
+    payload.photoData=PHOTO; payload.keepPhoto=KEEP_PHOTO;
+    payload.ackPhoto=$('ackPhoto').checked; payload.ackBenefit=$('ackBenefit').checked;
+    payload.emgName=val('emgName'); payload.emgRelation=val('emgRelation');
+    payload.emgPhone=val('emgPhone').replace(/[^0-9]/g,'');
+  }
+
+  var btn = dec==='สละสิทธิ์' ? $('subBtn1') : $('subBtn2');
+  var label = btn.textContent;
+  btn.disabled=true; btn.textContent='กำลังส่ง…';
+
+  post(payload, function(res){
+    btn.disabled=false; btn.textContent=label;
+    if(!res.ok) return showErr(res.error||'ส่งข้อมูลไม่สำเร็จ');
+    var r=ME.run;
+    if(res.declined){
+      $('doneTitle').textContent='รับทราบการสละสิทธิ์แล้ว';
+      $('doneLede').textContent='ขอบคุณที่แจ้งให้ทราบล่วงหน้า ทำให้สำนักฯ จัดสรรที่นั่งให้ผู้อื่นได้ทันเวลา';
+      $('doneCode').textContent=res.code;
+      $('doneBody').innerHTML='<div class="note">ระบบได้ส่งอีเมลรับทราบไปยังอีเมลของท่านแล้ว</div>';
+    }else{
+      $('doneTitle').textContent='ยืนยันการเข้าร่วมเรียบร้อยแล้ว';
+      $('doneLede').textContent='ระบบได้ส่งอีเมลยืนยันพร้อมรายละเอียดสถานที่ไปให้แล้ว';
+      $('doneCode').textContent=res.code;
+      $('doneBody').innerHTML=
+        '<div class="note"><b>'+esc(r.label)+' · '+esc(r.date)+'</b>'+
+        esc(res.hotel||r.place)+' '+esc(res.city||'')+
+        (res.map?'<br><a href="'+res.map+'" target="_blank" rel="noopener">เปิดแผนที่ใน Google Maps</a>':'')+
+        '<br><br>แก้ไขข้อมูลได้จนถึง '+esc(r.closeText)+' โดยกรอกเลขที่การสมัครและอีเมลหรือเบอร์โทรศัพท์เดิมอีกครั้ง</div>'+
+        ((res.line||r.line)?
+          '<div class="note"><b>ขั้นตอนต่อไป เข้ากลุ่มไลน์ของรุ่น</b>'+
+          'ใช้แจ้งกำหนดการ เอกสาร และประสานงานก่อนและระหว่างการอบรม<br>'+
+          '<a href="'+(res.line||r.line)+'" target="_blank" rel="noopener">'+
+          'เข้ากลุ่ม '+esc(r.label)+' ทันตกรรมป้องกันระดับปฐมภูมิ</a>'+
+          '<br><br>ลิงก์นี้อยู่ในอีเมลยืนยันที่ส่งไปให้ท่านด้วย</div>':'');
+    }
+    show('s-done');
+  });
+}
+
+/* ============================ เริ่มต้น ============================ */
+(function init(){
+  $('contact').textContent=CONTACT;
+  $('gCode').addEventListener('keydown',function(e){ if(e.key==='Enter') $('gVerify').focus(); });
+  $('gVerify').addEventListener('keydown',function(e){ if(e.key==='Enter') doLookup(); });
+})();
+</script>
+</body>
+</html>
