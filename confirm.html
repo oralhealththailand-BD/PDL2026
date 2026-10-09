@@ -319,7 +319,7 @@ a{color:var(--blue)}
       </div>
 
       <h3>ผู้ติดต่อกรณีฉุกเฉิน</h3>
-      <div class="hint" style="margin-bottom:.9rem">การอบรมเป็นแบบค้างคืน จึงขอข้อมูลไว้ใช้เฉพาะกรณีจำเป็น</div>
+      <div class="hint" style="margin-bottom:.9rem">การอบรมเป็นแบบค้างคืน 3 วัน จึงขอข้อมูลไว้ใช้เฉพาะกรณีจำเป็น</div>
       <div class="two">
         <div class="field"><label class="q" for="emgName">ชื่อ–นามสกุล <span class="req">*</span></label><input type="text" id="emgName"></div>
         <div class="field"><label class="q" for="emgRelation">ความสัมพันธ์</label><input type="text" id="emgRelation" placeholder="เช่น คู่สมรส บิดา มารดา"></div>
@@ -442,8 +442,10 @@ function fillForm(res){
     '<dt>เลขที่การสมัคร</dt><dd>'+esc(res.code)+'</dd>'+
     '<dt>รุ่นที่ได้รับจัดสรร</dt><dd>'+esc(r.label)+'</dd>'+
     '<dt>วันอบรม</dt><dd>'+esc(r.date)+'</dd>'+
-    '<dt>สถานที่</dt><dd>'+esc(r.hotel||r.place)+' '+esc(r.city)+
-      (r.map?' · <a href="'+r.map+'" target="_blank" rel="noopener">เปิดแผนที่</a>':'')+'</dd>'+
+    '<dt>สถานที่</dt><dd>'+(r.venueTentative
+        ? esc(r.place)+' <span style="color:#a86a12">(ยังไม่สรุปโรงแรม)</span>'
+        : esc(r.hotel||r.place)+' '+esc(r.city)+
+          (r.map?' · <a href="'+r.map+'" target="_blank" rel="noopener">เปิดแผนที่</a>':''))+'</dd>'+
     '<dt>สังกัด</dt><dd>'+esc(d.affiliation)+'</dd>'+
     '<dt>พื้นที่</dt><dd>เขต '+esc(d.zone)+' — '+esc(d.province)+'</dd>';
 
@@ -466,7 +468,9 @@ function fillForm(res){
       '<div class="note danger"><b>เงื่อนไขการสละสิทธิ์</b>'+
       'สำนักฯ สำรองห้องพักกับโรงแรมตามจำนวนผู้ยืนยันสิทธิ์ '+
       'หากสละสิทธิ์<b style="display:inline">หลังวันที่ '+esc(r.cancelFeeText)+'</b> '+
-      'ผู้เข้าอบรมต้องรับผิดชอบค่าที่พักที่สำรองไว้แล้วด้วยตนเอง</div>';
+      'ผู้เข้าอบรมต้องรับผิดชอบค่าที่พักที่สำรองไว้แล้วด้วยตนเอง<br><br>'+
+      'ภายในวันที่ '+esc(r.cancelFeeText)+' ท่านสละสิทธิ์ได้เองในระบบนี้ โดยไม่มีค่าใช้จ่าย '+
+      'หลังจากนั้นระบบจะปิด หากจำเป็นต้องสละสิทธิ์ กรุณาแจ้งผู้ประสานงานโดยตรง</div>';
     $('ackBenefitText').textContent='ข้าพเจ้ารับทราบขอบเขตการสนับสนุนค่าใช้จ่าย ส่วนที่ต้องเบิกจากต้นสังกัด '+
       'และเงื่อนไขว่าหากสละสิทธิ์หลังวันที่ '+r.cancelFeeText+' ข้าพเจ้าต้องรับผิดชอบค่าที่พักด้วยตนเอง';
   }else{
@@ -485,8 +489,10 @@ function fillForm(res){
   }else{
     $('stayBox').innerHTML =
       '<div class="note"><b>ที่พัก</b>ผู้เข้าอบรมจองที่พักเอง จึงไม่ต้องเลือกคู่พักในระบบนี้<br>'+
-      'สถานที่จัดอบรม '+esc(r.hotel||r.place)+' '+esc(r.city)+
-      (r.booking?'<br>ติดต่อจองห้องพัก '+esc(r.booking):'')+'</div>';
+      (r.venueTentative
+        ? 'สถานที่จัดอบรมอยู่ระหว่างประสานงาน <b>โปรดรออีเมลแจ้งสถานที่ก่อนจองที่พัก</b>'
+        : 'สถานที่จัดอบรม '+esc(r.hotel||r.place)+' '+esc(r.city)+
+          (r.booking?'<br>ติดต่อจองห้องพัก '+esc(r.booking):''))+'</div>';
     $('roomField').classList.add('hide');
   }
 
@@ -695,13 +701,20 @@ function sendPayload(){
       $('doneBody').innerHTML='<div class="note">ระบบได้ส่งอีเมลรับทราบไปยังอีเมลของท่านแล้ว</div>';
     }else{
       $('doneTitle').textContent='ยืนยันการเข้าร่วมเรียบร้อยแล้ว';
-      $('doneLede').textContent='ระบบได้ส่งอีเมลยืนยันพร้อมรายละเอียดสถานที่ไปให้แล้ว';
+      $('doneLede').textContent='ระบบได้ส่งอีเมลยืนยันไปให้แล้ว';
       $('doneCode').textContent=res.code;
       $('doneBody').innerHTML=
         '<div class="note"><b>'+esc(r.label)+' · '+esc(r.date)+'</b>'+
-        esc(res.hotel||r.place)+' '+esc(res.city||'')+
-        (res.map?'<br><a href="'+res.map+'" target="_blank" rel="noopener">เปิดแผนที่ใน Google Maps</a>':'')+
+        (res.venueTentative
+          ? esc(r.place)+' (ยังไม่สรุปโรงแรม)'
+          : esc(res.hotel||r.place)+' '+esc(res.city||'')+
+            (res.map?'<br><a href="'+res.map+'" target="_blank" rel="noopener">เปิดแผนที่ใน Google Maps</a>':''))+
         '<br><br>แก้ไขข้อมูลได้จนถึง '+esc(r.closeText)+' โดยกรอกเลขที่การสมัครและอีเมลหรือเบอร์โทรศัพท์เดิมอีกครั้ง</div>'+
+        (res.venueTentative
+          ? '<div class="note warn"><b>สถานที่จัดอบรมอยู่ระหว่างการประสาน</b>'+
+            esc(res.venueNote||'')+'<br><br>การยืนยันสิทธิ์ของท่านสมบูรณ์แล้ว '+
+            '<b>ยังไม่ต้องจองที่พักหรือซื้อตั๋วเดินทาง</b>จนกว่าจะได้รับอีเมลแจ้งสถานที่</div>'
+          : '')+
         ((res.line||r.line)?
           '<div class="note"><b>ขั้นตอนต่อไป เข้ากลุ่มไลน์ของรุ่น</b>'+
           'ใช้แจ้งกำหนดการ เอกสาร และประสานงานก่อนและระหว่างการอบรม'+
