@@ -246,10 +246,15 @@ function tune(res){
     due.innerHTML='<span>หมดเขตยืนยันสิทธิ์แล้ว หากมีข้อสงสัยกรุณาติดต่อผู้ประสานงาน</span>';
   }
 
-  /* ---- สมัคร ---- */
+  /* ---- สมัคร ----
+     ถ้าเซิร์ฟเวอร์ยังเป็นเวอร์ชันเก่าที่ไม่ส่ง regOpen มา ให้คงข้อความตั้งต้นใน HTML ไว้
+     "ไม่มีข้อมูล" กับ "ปิดรับสมัคร" เป็นคนละเรื่องกัน ห้ามเหมารวม */
+  var knowsReg = runs.some(function(r){ return typeof r.regOpen === 'boolean'; });
   var rOpen=runs.filter(function(r){ return r.regOpen; });
   var rc=$('cRegister'), rp=$('pRegister'), rd=$('dRegister');
-  if(rOpen.length){
+  if(!knowsReg){
+    /* ไม่ทำอะไร คงข้อความตั้งต้นใน HTML ไว้ */
+  }else if(rOpen.length){
     var rs=rOpen.slice().sort(function(a,b){
       return new Date(a.regCloseIso)-new Date(b.regCloseIso); })[0];
     var rdays=daysLeft(rs.regCloseIso);
