@@ -100,6 +100,32 @@ tr.done td:first-child::after{content:' ✓';font-weight:700}
   font-weight:600;padding:.75rem 1.7rem;border-radius:10px;transition:transform .12s}
 .cta a:hover{transform:translateY(-1px)}
 
+/* ---- ตรวจสถานะของตนเอง ---- */
+.check{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.4rem;
+  margin-bottom:1.1rem;box-shadow:0 1px 2px rgba(11,28,51,.05)}
+.check h2{font-size:1.1rem;font-weight:600;margin-bottom:.2rem}
+.check .lede{color:var(--muted);font-size:.92rem;margin-bottom:1rem}
+.f{display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem;align-items:end}
+.f label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.25rem}
+.f input{width:100%;font-family:inherit;font-size:1rem;padding:.65rem .8rem;
+  border:1.5px solid var(--line-2);border-radius:10px;background:#fff;color:var(--ink)}
+.f input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--tint-2)}
+.f button{font-family:inherit;font-size:1rem;font-weight:600;padding:.65rem 1.4rem;
+  border:0;border-radius:10px;background:var(--blue);color:#fff;cursor:pointer;white-space:nowrap}
+.f button:hover{background:var(--blue-dk)}
+.f button:disabled{opacity:.6;cursor:default}
+@media(max-width:620px){ .f{grid-template-columns:1fr} }
+
+.res{margin-top:1rem;border-radius:0 10px 10px 0;padding:.9rem 1.1rem;border-left:3px solid;
+  font-size:.95rem}
+.res b{display:block;margin-bottom:.15rem}
+.res.ok{border-color:var(--ok);background:var(--ok-bg)} .res.ok b{color:var(--ok)}
+.res.wait{border-color:var(--warn);background:var(--warn-bg)} .res.wait b{color:var(--warn)}
+.res.no{border-color:var(--danger);background:var(--danger-bg)} .res.no b{color:var(--danger)}
+.res.info{border-color:var(--blue);background:var(--info-bg)} .res.info b{color:var(--navy)}
+.res a{display:inline-block;margin-top:.6rem;background:var(--blue);color:#fff;text-decoration:none;
+  font-weight:600;padding:.55rem 1.2rem;border-radius:9px;font-size:.95rem}
+
 .note{border-left:3px solid var(--blue);background:var(--info-bg);padding:.85rem 1.05rem;
   border-radius:0 10px 10px 0;margin-bottom:1.1rem;font-size:.93rem}
 .note.warn{border-left-color:var(--warn);background:var(--warn-bg)}
@@ -229,6 +255,18 @@ function render(){
        '</p><a href="'+CONFIRM_URL+'">เข้าหน้ายืนยันสิทธิ์</a></div>';
   }
 
+  h+='<div class="check">'+
+     '<h2>ตรวจสถานะของท่าน</h2>'+
+     '<div class="lede">กรอกเลขที่การสมัคร และอีเมลหรือเบอร์โทรศัพท์ที่เคยลงทะเบียนไว้ '+
+     'เพื่อดูว่าท่านยืนยันสิทธิ์แล้วหรือยัง</div>'+
+     '<div class="f">'+
+     '<div><label for="mCode">เลขที่การสมัคร</label>'+
+     '<input type="text" id="mCode" placeholder="PDL69-1-007" autocomplete="off"></div>'+
+     '<div><label for="mVerify">อีเมลหรือเบอร์โทรศัพท์</label>'+
+     '<input type="text" id="mVerify" placeholder="อีเมล หรือ 08xxxxxxxx" autocomplete="off"></div>'+
+     '<button id="mBtn" onclick="checkMe()">ตรวจสอบ</button>'+
+     '</div><div id="mRes"></div></div>';
+
   DATA.runs.forEach(function(r){ h+=runCard(r); });
 
   h+='<div class="note"><b>หน้านี้แสดงอะไรบ้าง</b>'+
@@ -245,6 +283,69 @@ function render(){
   paintClock();
   if(TICK) clearInterval(TICK);
   TICK=setInterval(paintClock,1000);
+
+  ['mCode','mVerify'].forEach(function(id){
+    $(id).addEventListener('keydown',function(e){ if(e.key==='Enter') checkMe(); });
+  });
+}
+
+/* ---------- ตรวจสถานะของตนเอง ---------- */
+function resBox(cls,title,body,link){
+  $('mRes').innerHTML='<div class="res '+cls+'"><b>'+esc(title)+'</b>'+body+
+    (link?'<br><a href="'+CONFIRM_URL+'">'+esc(link)+'</a>':'')+'</div>';
+}
+function checkMe(){
+  var code=$('mCode').value.trim(), v=$('mVerify').value.trim();
+  if(!code||!v){ return resBox('no','กรอกข้อมูลไม่ครบ',
+    'กรุณากรอกทั้งเลขที่การสมัคร และอีเมลหรือเบอร์โทรศัพท์'); }
+
+  var btn=$('mBtn'); btn.disabled=true; btn.textContent='กำลังตรวจ…';
+  $('mRes').innerHTML='';
+
+  fetch(API,{ method:'POST', redirect:'follow',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({ action:'myStatus', code:code, verify:v }) })
+  .then(function(r){ return r.json(); })
+  .then(function(res){
+    btn.disabled=false; btn.textContent='ตรวจสอบ';
+    if(!res || !res.ok) return resBox('no','ตรวจสอบไม่สำเร็จ',
+      esc(res && res.error ? res.error : 'ไม่สามารถอ่านข้อมูลได้'));
+
+    var head=esc(res.code)+' · '+esc(res.runLabel)+
+             (res.runDate?' · '+esc(res.runDate):'');
+
+    if(res.state==='confirmed')
+      return resBox('ok','ท่านยืนยันสิทธิ์เรียบร้อยแล้ว',
+        head+(res.at?'<br>บันทึกเมื่อ '+esc(res.at)+' น.':'')+
+        '<br>หากต้องการแก้ไขข้อมูล เข้าหน้ายืนยันสิทธิ์ได้จนถึง '+esc(res.closeText),
+        res.open?'แก้ไขข้อมูลของฉัน':'');
+
+    if(res.state==='declined')
+      return resBox('info','ระบบบันทึกการสละสิทธิ์ของท่านแล้ว',
+        head+(res.at?'<br>บันทึกเมื่อ '+esc(res.at)+' น.':'')+
+        (res.open?'<br>หากเปลี่ยนใจ ยังกลับมายืนยันเข้าร่วมได้จนถึง '+esc(res.closeText)
+                 :'<br>หากมีข้อสงสัย กรุณาติดต่อผู้ประสานงาน'),
+        res.open?'กลับไปยืนยันเข้าร่วม':'');
+
+    if(res.state==='notEligible')
+      return resBox('info','ขอขอบคุณที่ให้ความสนใจ', esc(res.message));
+
+    /* ยังไม่ยืนยัน */
+    if(res.notOpen)
+      return resBox('info','ยังไม่เปิดให้ยืนยันสิทธิ์', head+
+        '<br>จะแจ้งกำหนดการให้ทราบทางอีเมล');
+    if(!res.open)
+      return resBox('no','หมดเขตยืนยันสิทธิ์แล้ว', head+
+        '<br>ปิดรับเมื่อ '+esc(res.closeText)+' กรุณาติดต่อผู้ประสานงานโดยด่วน');
+
+    resBox('wait','ท่านยังไม่ได้ยืนยันสิทธิ์', head+
+      '<br>กรุณายืนยันภายใน '+esc(res.closeText)+' เวลา 16.30 น. '+
+      'หากพ้นกำหนดจะถือว่าสละสิทธิ์', 'ยืนยันสิทธิ์ตอนนี้');
+  })
+  .catch(function(e){
+    btn.disabled=false; btn.textContent='ตรวจสอบ';
+    resBox('no','เชื่อมต่อไม่สำเร็จ', esc(e.message)+' กรุณาลองใหม่อีกครั้ง');
+  });
 }
 
 function runCard(r){
