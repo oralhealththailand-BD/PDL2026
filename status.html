@@ -8,8 +8,80 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css">
 <style>
+/* ===== ไฟล์นี้รวมทุกอย่างไว้ในตัวเอง ไม่ต้องมีโฟลเดอร์ assets ===== */
+
+:root{
+  --navy:#0b1c33; --navy-2:#12305c; --blue:#1c4fd8; --blue-dk:#1740ae; --blue-lt:#4a7cf0;
+  --tint:#eef3fd; --tint-2:#dde7fb;
+  --silver:#e6eaf1; --silver-2:#ccd4e0; --steel:#f4f6fa;
+  --line:#e0e5ee; --line-2:#cfd7e4;
+  --ink:#0d1b2e; --muted:#5a6779;
+  --info-bg:#f3f7fe; --info-line:#1c4fd8;
+  --warn:#a86a12; --warn-bg:#fdf5e6;
+  --danger:#b42318; --danger-bg:#fdf1f0;
+  --ok:#1a7f52; --ok-bg:#eaf6f0;
+  --wrap:900px; --r:16px; --r-sm:10px;
+  --shadow:0 1px 2px rgba(11,28,51,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'IBM Plex Sans Thai','Segoe UI',Tahoma,sans-serif;background:var(--steel);
+  color:var(--ink);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+
+.masthead{background:linear-gradient(158deg,var(--navy) 0%,#102a52 58%,var(--navy-2) 100%);
+  color:#fff;position:relative;overflow:hidden}
+.masthead::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 46px);
+  pointer-events:none}
+.masthead .in{max-width:var(--wrap);margin:0 auto;padding:1.8rem 1.25rem 1.5rem;position:relative}
+.org{font-size:.82rem;letter-spacing:.04em;color:#a9c0e8;margin-bottom:.5rem}
+.masthead h1{font-size:1.5rem;font-weight:600;line-height:1.4;letter-spacing:-.01em}
+.masthead .sub{margin-top:.9rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.16);
+  font-size:.93rem;color:#c5d6f0}
+
+main{max-width:var(--wrap);margin:0 auto;padding:1.4rem 1.25rem 1rem}
+footer{max-width:var(--wrap);margin:0 auto;padding:.6rem 1.25rem 3rem;color:var(--muted);
+  font-size:.85rem}
+footer .fin{border-top:1px solid var(--line);padding-top:1rem}
+
+.pill{font-size:.77rem;font-weight:600;padding:.22rem .68rem;border-radius:999px;white-space:nowrap}
+.pill.open{background:var(--ok-bg);color:var(--ok)}
+.pill.shut{background:var(--silver);color:var(--muted)}
+
+.note{border-left:3px solid var(--info-line);background:var(--info-bg);padding:.85rem 1.05rem;
+  border-radius:0 var(--r-sm) var(--r-sm) 0;margin-bottom:1.1rem;font-size:.93rem}
+.note b{display:block;margin-bottom:.15rem;color:var(--navy)}
+.note.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+
+.btn{display:inline-block;font-family:inherit;font-size:1rem;font-weight:600;
+  padding:.7rem 1.5rem;border:0;border-radius:var(--r-sm);background:var(--blue);color:#fff;
+  text-decoration:none;cursor:pointer;transition:background .12s}
+.btn:hover{background:var(--blue-dk)}
+.btn:disabled{opacity:.6;cursor:default}
+.btn.ghost{background:none;color:var(--muted);border:1px solid var(--line-2)}
+.btn.ghost:hover{color:var(--blue);border-color:var(--blue);background:none}
+
+input[type=text]{width:100%;font-family:inherit;font-size:1rem;padding:.65rem .8rem;
+  border:1.5px solid var(--line-2);border-radius:var(--r-sm);background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--tint-2)}
+
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{padding:.5rem;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:.84rem;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+.state{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.spin{width:26px;height:26px;border:2.5px solid var(--silver);border-top-color:var(--blue);
+  border-radius:50%;margin:0 auto 1rem;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.hide{display:none!important}
+@media(max-width:560px){ .masthead h1{font-size:1.25rem} }
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- เฉพาะหน้านี้ ---------- */
+
 /* เฉพาะหน้าสถานะ */
 .clock{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem;
   margin-bottom:1.1rem;box-shadow:var(--shadow)}
@@ -91,9 +163,18 @@ tr.done td:first-child::after{content:' ✓';font-weight:700}
   .clock .big{font-size:1.6rem}
   .legend{gap:.9rem}
 }
+
 </style>
 </head>
 <body>
+
+<header class="masthead">
+  <div class="in">
+    <div class="org">สำนักทันตสาธารณสุข กรมอนามัย กระทรวงสาธารณสุข</div>
+    <h1>สถานะการยืนยันสิทธิ์เข้ารับการอบรม<br>ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</h1>
+    <div class="sub">แสดงเฉพาะจำนวนรวม ไม่เปิดเผยรายชื่อหรือข้อมูลส่วนบุคคล</div>
+  </div>
+</header>
 
 <main>
   <div id="loading" class="state"><div class="spin"></div>กำลังโหลดข้อมูล…</div>
@@ -108,19 +189,29 @@ tr.done td:first-child::after{content:' ✓';font-weight:700}
   </div>
 </footer>
 
-<script src="assets/shell.js" data-page="status"
-  data-sub="แสดงเฉพาะจำนวนรวม ไม่เปิดเผยรายชื่อหรือข้อมูลส่วนบุคคล"></script>
-
 <script>
+
+/* ---------- ตั้งค่าและฟังก์ชันพื้นฐาน (ไฟล์นี้ทำงานได้ด้วยตัวเอง) ---------- */
+var API = 'https://script.google.com/macros/s/AKfycbwPBlO9PrYNpMofFnwGE97JcHi2P87-UAf6-wI5IqvHOO72avFtef6mBatx6J1JEznqaw/exec';
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ var d=document.createElement('div'); d.textContent=s==null?'':s; return d.innerHTML; }
+function n(x){ return Number(x||0).toLocaleString('th-TH'); }
+function post(payload){
+  return fetch(API, { method:'POST', redirect:'follow',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload) }).then(function(r){ return r.json(); });
+}
+
 var CONFIRM_URL = 'confirm.html';
 var DATA = null, TICK = null;
-var $=PDL.$, esc=PDL.esc, n=PDL.num;
+
 
 /* ---------- ดึงข้อมูล ---------- */
 function load(manual){
   if(manual){ $('body').classList.add('hide'); $('fail').classList.add('hide');
               $('loading').classList.remove('hide'); }
-  PDL.post({ action:'confirmStats' })
+  post({ action:'confirmStats' })
   .then(function(res){
     if(!res || !res.ok) throw new Error(res && res.error ? res.error : 'ไม่สามารถอ่านข้อมูลได้');
     DATA = res; render();
@@ -230,7 +321,7 @@ function checkMe(){
   var btn=$('mBtn'); btn.disabled=true; btn.textContent='กำลังตรวจ…';
   $('mRes').innerHTML='';
 
-  PDL.post({ action:'myStatus', code:code, verify:v })
+  post({ action:'myStatus', code:code, verify:v })
   .then(function(res){
     btn.disabled=false; btn.textContent='ตรวจสอบ';
     if(!res || !res.ok) return resBox('no','ตรวจสอบไม่สำเร็จ',
@@ -324,6 +415,7 @@ function runCard(r){
 
 load();
 setInterval(function(){ load(false); }, 120000);
+
 </script>
 </body>
 </html>
