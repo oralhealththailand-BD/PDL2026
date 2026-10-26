@@ -8,39 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
 <style>
-:root{
-  --navy:#0b1c33; --navy-2:#12305c; --blue:#1c4fd8; --blue-dk:#1740ae; --blue-lt:#4a7cf0;
-  --tint:#eef3fd; --tint-2:#dde7fb;
-  --silver:#e6eaf1; --silver-2:#ccd4e0; --steel:#f4f6fa;
-  --line:#e0e5ee; --line-2:#cfd7e4;
-  --ink:#0d1b2e; --muted:#5a6779;
-  --info-bg:#f3f7fe;
-  --warn:#a86a12; --warn-bg:#fdf5e6;
-  --danger:#b42318; --danger-bg:#fdf1f0;
-  --ok:#1a7f52; --ok-bg:#eaf6f0;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'IBM Plex Sans Thai','Segoe UI',Tahoma,sans-serif;background:var(--steel);
-  color:var(--ink);line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
-
-.masthead{background:linear-gradient(158deg,var(--navy) 0%,#102a52 58%,var(--navy-2) 100%);
-  color:#fff;padding:2rem 1.25rem 1.8rem;position:relative;overflow:hidden}
-.masthead::before{content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 46px);
-  pointer-events:none}
-.masthead .in{max-width:860px;margin:0 auto;position:relative}
-.org{font-size:.82rem;letter-spacing:.04em;color:#a9c0e8;margin-bottom:.5rem}
-.masthead h1{font-size:1.5rem;font-weight:600;line-height:1.4;letter-spacing:-.01em}
-.masthead .sub{margin-top:.9rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.16);
-  font-size:.93rem;color:#c5d6f0}
-
-main{max-width:860px;margin:0 auto;padding:1.5rem 1.25rem 1rem}
-
-/* ---- นับถอยหลัง ---- */
-.clock{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.4rem;
-  margin-bottom:1.1rem;box-shadow:0 1px 2px rgba(11,28,51,.05)}
+/* เฉพาะหน้าสถานะ */
+.clock{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem;
+  margin-bottom:1.1rem;box-shadow:var(--shadow)}
 .clock.urgent{border-color:#f0c3bd;background:linear-gradient(180deg,#fff 0%,var(--danger-bg) 100%)}
 .clock .lab{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
   font-weight:600}
@@ -49,17 +21,12 @@ main{max-width:860px;margin:0 auto;padding:1.5rem 1.25rem 1rem}
 .clock.urgent .big{color:var(--danger)}
 .clock .when{color:var(--muted);font-size:.93rem}
 
-/* ---- การ์ดรุ่น ---- */
-.run{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.4rem;
-  margin-bottom:1.1rem;box-shadow:0 1px 2px rgba(11,28,51,.05)}
+.run{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem;
+  margin-bottom:1.1rem;box-shadow:var(--shadow)}
 .run-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
   flex-wrap:wrap;margin-bottom:1rem}
 .run h2{font-size:1.18rem;font-weight:600}
 .run .meta{color:var(--muted);font-size:.9rem;margin-top:.15rem}
-.pill{font-size:.78rem;font-weight:600;padding:.25rem .7rem;border-radius:999px;white-space:nowrap}
-.pill.open{background:var(--ok-bg);color:var(--ok)}
-.pill.shut{background:var(--silver);color:var(--muted)}
-.pill.soon{background:var(--warn-bg);color:var(--warn)}
 
 .headline{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.55rem}
 .headline .n{font-size:2.3rem;font-weight:700;color:var(--blue);line-height:1;
@@ -77,89 +44,56 @@ main{max-width:860px;margin:0 auto;padding:1.5rem 1.25rem 1rem}
   font-variant-numeric:tabular-nums;line-height:1.3}
 .legend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.35rem;
   vertical-align:middle}
-.dot.c{background:var(--blue)} .dot.d{background:var(--silver-2)} .dot.p{background:#fff;
-  border:2px solid var(--silver-2)}
+.dot.c{background:var(--blue)} .dot.d{background:var(--silver-2)}
+.dot.p{background:#fff;border:2px solid var(--silver-2)}
+.dot.x{background:var(--danger);opacity:.45}
 
 details{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem}
 summary{cursor:pointer;font-size:.9rem;color:var(--blue);font-weight:500;list-style:none}
 summary::-webkit-details-marker{display:none}
 summary::before{content:'▸ ';display:inline-block;transition:transform .15s}
 details[open] summary::before{transform:rotate(90deg)}
-table{width:100%;border-collapse:collapse;margin-top:.7rem;font-size:.92rem}
-th,td{padding:.45rem .5rem;text-align:right;border-bottom:1px solid var(--line)}
-th:first-child,td:first-child{text-align:left}
-th{font-weight:600;color:var(--muted);font-size:.84rem;white-space:nowrap}
-td{font-variant-numeric:tabular-nums}
+details table{margin-top:.7rem}
+details th,details td{text-align:right}
+details th:first-child,details td:first-child{text-align:left}
+details td{font-variant-numeric:tabular-nums}
 tr.done td{color:var(--ok)}
 tr.done td:first-child::after{content:' ✓';font-weight:700}
 
-.cta{background:linear-gradient(158deg,var(--navy) 0%,#13315f 100%);color:#fff;border-radius:16px;
-  padding:1.4rem;margin-bottom:1.1rem;text-align:center}
+.cta{background:linear-gradient(158deg,var(--navy) 0%,#13315f 100%);color:#fff;
+  border-radius:var(--r);padding:1.4rem;margin-bottom:1.1rem;text-align:center}
 .cta p{color:#c5d6f0;font-size:.95rem;margin-bottom:1rem}
 .cta a{display:inline-block;background:#fff;color:var(--navy);text-decoration:none;
-  font-weight:600;padding:.75rem 1.7rem;border-radius:10px;transition:transform .12s}
+  font-weight:600;padding:.75rem 1.7rem;border-radius:var(--r-sm);transition:transform .12s}
 .cta a:hover{transform:translateY(-1px)}
 
-/* ---- ตรวจสถานะของตนเอง ---- */
-.check{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.4rem;
-  margin-bottom:1.1rem;box-shadow:0 1px 2px rgba(11,28,51,.05)}
+.check{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem;
+  margin-bottom:1.1rem;box-shadow:var(--shadow)}
 .check h2{font-size:1.1rem;font-weight:600;margin-bottom:.2rem}
 .check .lede{color:var(--muted);font-size:.92rem;margin-bottom:1rem}
 .f{display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem;align-items:end}
 .f label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.25rem}
-.f input{width:100%;font-family:inherit;font-size:1rem;padding:.65rem .8rem;
-  border:1.5px solid var(--line-2);border-radius:10px;background:#fff;color:var(--ink)}
-.f input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--tint-2)}
-.f button{font-family:inherit;font-size:1rem;font-weight:600;padding:.65rem 1.4rem;
-  border:0;border-radius:10px;background:var(--blue);color:#fff;cursor:pointer;white-space:nowrap}
-.f button:hover{background:var(--blue-dk)}
-.f button:disabled{opacity:.6;cursor:default}
 @media(max-width:620px){ .f{grid-template-columns:1fr} }
 
-.res{margin-top:1rem;border-radius:0 10px 10px 0;padding:.9rem 1.1rem;border-left:3px solid;
-  font-size:.95rem}
+.res{margin-top:1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;padding:.9rem 1.1rem;
+  border-left:3px solid;font-size:.95rem}
 .res b{display:block;margin-bottom:.15rem}
 .res.ok{border-color:var(--ok);background:var(--ok-bg)} .res.ok b{color:var(--ok)}
 .res.wait{border-color:var(--warn);background:var(--warn-bg)} .res.wait b{color:var(--warn)}
 .res.no{border-color:var(--danger);background:var(--danger-bg)} .res.no b{color:var(--danger)}
 .res.info{border-color:var(--blue);background:var(--info-bg)} .res.info b{color:var(--navy)}
-.res a{display:inline-block;margin-top:.6rem;background:var(--blue);color:#fff;text-decoration:none;
-  font-weight:600;padding:.55rem 1.2rem;border-radius:9px;font-size:.95rem}
+.res a{display:inline-block;margin-top:.6rem;background:var(--blue);color:#fff;
+  text-decoration:none;font-weight:600;padding:.55rem 1.2rem;border-radius:9px;font-size:.95rem}
 
-.note{border-left:3px solid var(--blue);background:var(--info-bg);padding:.85rem 1.05rem;
-  border-radius:0 10px 10px 0;margin-bottom:1.1rem;font-size:.93rem}
-.note.warn{border-left-color:var(--warn);background:var(--warn-bg)}
-.note b{display:block;margin-bottom:.15rem;color:var(--navy)}
-
-.state{text-align:center;padding:3rem 1rem;color:var(--muted)}
-.spin{width:26px;height:26px;border:2.5px solid var(--silver);border-top-color:var(--blue);
-  border-radius:50%;margin:0 auto 1rem;animation:sp .7s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-
-footer{max-width:860px;margin:0 auto;padding:.5rem 1.25rem 3rem;color:var(--muted);font-size:.85rem}
 .upd{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
-.upd button{background:none;border:1px solid var(--line-2);color:var(--muted);
-  font-family:inherit;font-size:.82rem;padding:.3rem .8rem;border-radius:8px;cursor:pointer}
-.upd button:hover{border-color:var(--blue);color:var(--blue)}
-.hide{display:none}
 @media(max-width:560px){
-  .masthead h1{font-size:1.25rem}
   .headline .n{font-size:1.9rem}
   .clock .big{font-size:1.6rem}
   .legend{gap:.9rem}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<header class="masthead">
-  <div class="in">
-    <div class="org">สำนักทันตสาธารณสุข กรมอนามัย กระทรวงสาธารณสุข</div>
-    <h1>สถานะการยืนยันสิทธิ์เข้ารับการอบรม<br>ผู้นำด้านทันตกรรมป้องกันระดับปฐมภูมิ</h1>
-    <div class="sub">แสดงเฉพาะจำนวนรวม ไม่เปิดเผยรายชื่อหรือข้อมูลส่วนบุคคล</div>
-  </div>
-</header>
 
 <main>
   <div id="loading" class="state"><div class="spin"></div>กำลังโหลดข้อมูล…</div>
@@ -168,31 +102,25 @@ footer{max-width:860px;margin:0 auto;padding:.5rem 1.25rem 3rem;color:var(--mute
 </main>
 
 <footer>
-  <div class="upd">
+  <div class="fin upd">
     <span id="updated"></span>
-    <button onclick="load(true)">รีเฟรช</button>
+    <button class="btn ghost" style="font-size:.82rem;padding:.3rem .8rem" onclick="load(true)">รีเฟรช</button>
   </div>
 </footer>
 
-<script>
-var API = 'https://script.google.com/macros/s/AKfycbwPBlO9PrYNpMofFnwGE97JcHi2P87-UAf6-wI5IqvHOO72avFtef6mBatx6J1JEznqaw/exec';
-var CONFIRM_URL = 'https://oralhealththailand-bd.github.io/PDL2026/confirm.html';
+<script src="assets/shell.js" data-page="status"
+  data-sub="แสดงเฉพาะจำนวนรวม ไม่เปิดเผยรายชื่อหรือข้อมูลส่วนบุคคล"></script>
 
+<script>
+var CONFIRM_URL = 'confirm.html';
 var DATA = null, TICK = null;
-function $(id){ return document.getElementById(id); }
-function esc(s){ var d=document.createElement('div'); d.textContent=s==null?'':s; return d.innerHTML; }
-function n(x){ return Number(x||0).toLocaleString('th-TH'); }
+var $=PDL.$, esc=PDL.esc, n=PDL.num;
 
 /* ---------- ดึงข้อมูล ---------- */
 function load(manual){
   if(manual){ $('body').classList.add('hide'); $('fail').classList.add('hide');
               $('loading').classList.remove('hide'); }
-  fetch(API, {
-    method:'POST', redirect:'follow',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({ action:'confirmStats' })
-  })
-  .then(function(r){ return r.json(); })
+  PDL.post({ action:'confirmStats' })
   .then(function(res){
     if(!res || !res.ok) throw new Error(res && res.error ? res.error : 'ไม่สามารถอ่านข้อมูลได้');
     DATA = res; render();
@@ -264,7 +192,7 @@ function render(){
      '<input type="text" id="mCode" placeholder="PDL69-1-007" autocomplete="off"></div>'+
      '<div><label for="mVerify">อีเมลหรือเบอร์โทรศัพท์</label>'+
      '<input type="text" id="mVerify" placeholder="อีเมล หรือ 08xxxxxxxx" autocomplete="off"></div>'+
-     '<button id="mBtn" onclick="checkMe()">ตรวจสอบ</button>'+
+     '<button class="btn" id="mBtn" onclick="checkMe()">ตรวจสอบ</button>'+
      '</div><div id="mRes"></div></div>';
 
   DATA.runs.forEach(function(r){ h+=runCard(r); });
@@ -302,10 +230,7 @@ function checkMe(){
   var btn=$('mBtn'); btn.disabled=true; btn.textContent='กำลังตรวจ…';
   $('mRes').innerHTML='';
 
-  fetch(API,{ method:'POST', redirect:'follow',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({ action:'myStatus', code:code, verify:v }) })
-  .then(function(r){ return r.json(); })
+  PDL.post({ action:'myStatus', code:code, verify:v })
   .then(function(res){
     btn.disabled=false; btn.textContent='ตรวจสอบ';
     if(!res || !res.ok) return resBox('no','ตรวจสอบไม่สำเร็จ',
@@ -367,28 +292,30 @@ function runCard(r){
     return h;
   }
 
-  var pc = r.eligible ? Math.round(r.confirmed/r.eligible*100) : 0;
-  var pd = r.eligible ? Math.round(r.declined /r.eligible*100) : 0;
+  /* ตัวหารคือจำนวนที่นั่ง ไม่ใช่จำนวนรายชื่อ
+     เพราะเมื่อเรียกสำรอง รายชื่อจะมากกว่าที่นั่งเสมอ */
+  var seats = r.seats || r.eligible || 0;
+  var pc = seats ? Math.min(100, Math.round(r.confirmed/seats*100)) : 0;
 
   h+='<div class="headline"><span class="n">'+n(r.confirmed)+'</span>'+
-     '<span class="of">ยืนยันแล้ว จากผู้มีสิทธิ์ '+n(r.eligible)+' ท่าน · '+pc+'%</span></div>'+
-     '<div class="bar"><i class="c" style="width:'+pc+'%"></i>'+
-     '<i class="d" style="width:'+pd+'%"></i></div>'+
+     '<span class="of">ยืนยันแล้ว จาก '+n(seats)+' ที่นั่ง · '+pc+'%</span></div>'+
+     '<div class="bar"><i class="c" style="width:'+pc+'%"></i></div>'+
      '<div class="legend">'+
      '<div><b>'+n(r.confirmed)+'</b><span class="dot c"></span>ยืนยันเข้าร่วม</div>'+
-     '<div><b>'+n(r.pending)+'</b><span class="dot p"></span>ยังไม่ยืนยัน</div>'+
+     '<div><b>'+n(r.pending)+'</b><span class="dot p"></span>รอยืนยัน</div>'+
      '<div><b>'+n(r.declined)+'</b><span class="dot d"></span>สละสิทธิ์</div>'+
+     (r.expired ? '<div><b>'+n(r.expired)+'</b><span class="dot x"></span>ตัดสิทธิ์</div>' : '')+
      '</div>';
 
   if(r.zones && r.zones.length){
     h+='<details><summary>ดูรายเขตสุขภาพ</summary><table>'+
-       '<tr><th>เขตสุขภาพ</th><th>มีสิทธิ์</th><th>ยืนยัน</th><th>สละสิทธิ์</th><th>ยังไม่ยืนยัน</th></tr>';
+       '<tr><th>เขตสุขภาพ</th><th>ยืนยัน</th><th>รอยืนยัน</th><th>สละสิทธิ์</th><th>ตัดสิทธิ์</th></tr>';
     r.zones.forEach(function(z){
       var done = z.pending===0;
       h+='<tr'+(done?' class="done"':'')+'>'+
          '<td>'+(z.zone?('เขต '+z.zone):'ไม่ระบุ')+'</td>'+
-         '<td>'+n(z.eligible)+'</td><td>'+n(z.confirmed)+'</td>'+
-         '<td>'+n(z.declined)+'</td><td>'+n(z.pending)+'</td></tr>';
+         '<td>'+n(z.confirmed)+'</td><td>'+n(z.pending)+'</td>'+
+         '<td>'+n(z.declined)+'</td><td>'+n(z.expired||0)+'</td></tr>';
     });
     h+='</table></details>';
   }
